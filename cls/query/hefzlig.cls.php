@@ -1,7 +1,7 @@
 <?php
 class query_hefzlig_cls extends query_cls
 {
-
+// 4
 
 	/**
 	 * Sets the running.
