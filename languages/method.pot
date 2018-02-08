@@ -18,6 +18,10 @@ msgstr ""
 "X-Loco-Source-Locale: _\n"
 "X-Generator: Loco - https://localise.biz/"
 
+msgid "endofterm"
+msgstr "پایان ترم"
+msgid "classroom"
+msgstr "کلاسی"
 msgid "posts_title"
 msgstr ""
 

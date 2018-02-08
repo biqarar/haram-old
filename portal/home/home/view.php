@@ -8,20 +8,20 @@ class view extends main_view {
 		//------------------------------ globals
 		$this->global->page_title = 'Profile';
 
-	
+	// var_dump($_SESSION['my_user']['permission']);exit();
 		//------------------------------ globals type
-		$this->global->type = isset($_SESSION['user']['type']) ? $_SESSION['user']['type'] : "";		
+		$this->global->type = isset($_SESSION['my_user']['type']) ? $_SESSION['my_user']['type'] : "";
 
 		//------------------------------ globals (name & family)
-		$this->global->name = isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : "";
-		
-		$this->global->family = isset($_SESSION['user']['family']) ? $_SESSION['user']['family'] : "";
-		
+		$this->global->name = isset($_SESSION['my_user']['name']) ? $_SESSION['my_user']['name'] : "";
+
+		$this->global->family = isset($_SESSION['my_user']['family']) ? $_SESSION['my_user']['family'] : "";
+
 		//------------------------------ globals (gender)
-		if(isset($_SESSION['user']['gender'])){
-		
-			$this->global->gender = ($_SESSION['user']['gender']  == "male") ? _("Mr.") : _("Mrs.");
-		
+		if(isset($_SESSION['my_user']['gender'])){
+
+			$this->global->gender = ($_SESSION['my_user']['gender']  == "male") ? _("Mr.") : _("Mrs.");
+
 		}
 
 		// var_dump($this->sql("#query"));

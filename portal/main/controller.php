@@ -4,19 +4,19 @@ class main_controller{
 	public $__autocallMethod = array("sql", "redirect", "checkRedirect", "addMethod", "addPeroperty");
 	public $__autogetProperty = array( "redirect");
 	public $access = false; // for after lunch
-	
+
 	public final function __construct(){
-		
+
 		if(global_cls::supervisor()){
 			$this->access = true; // for befor lunch
 		}
 
-		if(preg_match("/favicon\.ico$/", $_SERVER['REQUEST_URI'])){
-			die("favicon.ico");
-		}
+		// if(preg_match("/favicon\.ico$/", $_SERVER['REQUEST_URI'])){
+		// 	die("favicon.ico");
+		// }
 
 		$this->xuStatus();
-		
+
 		$permission = new checkPermission_cls;
 		$permission->check();
 		$this->querys = (object) "query";
@@ -144,7 +144,7 @@ class main_controller{
 		$x =  new changeDate_cls;
 		return $x->change($date, $days, $operator);
 	}
-	
+
 	public function tag($tag = false) {
 		return new tagMaker_lib($tag);
 	}
@@ -154,12 +154,13 @@ class main_controller{
 	}
 
 	/**
-	* @return date whit 8 number 
-	* @example 13930801 
+	* @return date whit 8 number
+	* @example 13930801
 	*/
 
-	public function dateNow() {
-		return $this->jTime()->date("Ymd", false, false);
+	public function dateNow($_format = "Ymd")
+	{
+		return $this->jTime()->date($_format, false, false);
 	}
 
 	public function db($string) {
@@ -313,7 +314,7 @@ class main_controller{
 		if(global_cls::supervisor()){
 			return [true, true];
 		}
-		
+
 		$msg = "";
 		$access = false;
 		if($this->access) {
@@ -330,7 +331,7 @@ class main_controller{
 
 		}else{
 			// check permission
-			$session_permission = isset($_SESSION['user']['permission']['tables']) ? $_SESSION['user']['permission']['tables'] : false;
+			$session_permission = isset($_SESSION['my_user']['permission']['tables']) ? $_SESSION['my_user']['permission']['tables'] : false;
 			$page_permission = $this->permission;
 			$closeF = false;
 			foreach ($page_permission as $table => $oprator) {
@@ -353,20 +354,20 @@ class main_controller{
 	}
 
 	public function SESSION_usersid() {
-		return ($this->login()) ? $_SESSION['user']['id'] : 0;
+		return ($this->login()) ? $_SESSION['my_user']['id'] : 0;
 	}
 
 	public function login($arg = false) {
-		if(isset($_SESSION['user']['id'])){
+		if(isset($_SESSION['my_user']['id'])){
 			if($arg && $arg != "all" && $arg != "*"  && $arg != "select_branch") {
-				return $_SESSION['user'][$arg];
+				return $_SESSION['my_user'][$arg];
 			}elseif($arg && ($arg == "all" || $arg == "*")){
-				return $_SESSION['user'];
+				return $_SESSION['my_user'];
 			}elseif($arg && $arg == "select_branch"){
-				
-				return 
-				(isset($_SESSION['user']['branch']['selected']) &&
-				 !empty($_SESSION['user']['branch']['selected'])) ? true :false;
+
+				return
+				(isset($_SESSION['my_user']['branch']['selected']) &&
+				 !empty($_SESSION['my_user']['branch']['selected'])) ? true :false;
 			}else{
 				return true;
 			}

@@ -1,4 +1,3 @@
-
 <style type="text/css">
 	.cls1{
 		width:22px;
@@ -23,6 +22,10 @@
 		width:140px;
 
 	}
+	.bridge
+    {
+        width: 118px;
+    }
 	tbody{
 		page-break-inside:avoid;
 		page-break-after:auto;
@@ -36,7 +39,28 @@
 		size: A4 landscape;
 		margin:1.5cm 1cm 1cm 1cm;
 	}
+
+	.description{
+
+	    font-family: "WYekan";
+	    background-color: wheat;
+	    width: 100%;
+	    display: inherit;
+	}
+
+	.pl-action {
+		position: absolute;
+	    margin-top: 24px;
+	    margin-right: 2px;
+	    padding: 0px 10px;
+	    color: #59c5c5;
+	    font-family: "WYekan";
+	    display: none;
+	}
+
+
 </style>
+
 <div class="class-details colory">
 	{% for key, header in detail.header %}
 	<div class="class-detail normal-font">
@@ -48,7 +72,15 @@
 
 	<div style="clear:both"></div>
 </div>
-
+	<dib class="description">
+		ترتیب دکمه های نوع غیبت عبارت است از:
+		<a class="unjustifiedabsence" style="color:black;background-color:white">غیبت غیر موجه</a>،
+		<a class="justifiedabsence" style="color:black;background-color:#59c5c5">غیبت موجه</a>،
+		<a class="leave" style="color:black;background-color:#baf5ba">مرخصی</a>
+		و
+		<a class="delay" style="color:black;background-color:#ffffc4">تاخیر</a>
+		بازدن بر روی هر گزینه رنگ پس زمینه آن خانه به رنگ های اعلام شده در این متن تغییر می کند
+	</dib>
 <table cellspacing="0" cellpadding="0">
 	<!-- header -->
 	<tr>
@@ -56,41 +88,31 @@
 		<td class="small-font system-default cls2" rowspan="2">نام و نام خانوادگی</td>
 		<td class="small-font system-default cls3" rowspan="2">نام کاربری</td>
 		<td class="small-font system-default cls4">روز</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
-		<td class="small-font system-default cslc">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm1">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm2">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm3">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm4">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm5">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm6">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm7">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm8">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm9">...شنبه</td>
+		<td class="small-font system-default cslc weekdays" xclass="xm10">...شنبه</td>
 		<td class="small-font system-default clst bridge" rowspan="2"><span >شماره تماس</span></td>
 		<td class="small-font system-default clse" rowspan="2">توضیحات</td>
 	</tr>
 	<tr>
 		<td class="small-font">تاریخ</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td class="small-font">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm1"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm2"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm3"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm4"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm5"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm6"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm7"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm8"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm9"></td>
+		<td class="small-font"><input type="text" date="date" style="width:67px;" xclass="xm10"></td>
 	</tr>
 	<!-- end of header -->
 	<!-- record -->
@@ -100,120 +122,300 @@
 			<td rowspan="2" class="cls1">{{key +1}}</td>
 			<td class="normal-font cls2" rowspan="2">{{list.name}} {{list.family}}</td>
 			<td rowspan="2" class="small-font cls3">{{list.username}}</td>
-			<td class="small-font system-default colory cls4">حضور و غیاب</td>
-			<td class="colory cslc">
-				<button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="small-font system-default colory cls4">ثبت غیبت</td>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm1">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm2">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm3">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm4">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm5">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm6">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm7">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm8">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm9">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
+			<td class="colory cslc" style="width:71px;" style="width:71px;">
+				<a class="insertAbsenceApi icodadd" classificationid="{{list.classificationid}}" style="cursor:pointer;" xclass="xm10">
+				</a>
 			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
-			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
-			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
-			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
-			</td>
-			<td class="colory cslc"><button type="submit" id="backPortal">
-					<a href="classification/class/classesid={{classesid}}" class="a-undefault">
-						<img src="static/svg/icons/dadd.svg" style="width:20px">
-					</a>
-				</button>
-			</td>
+
 			<td class="normal-font clst bridge"><span >{{list.phone}}</span></td>
 			<td rowspan="2" class="clse">{{list.price}}</td>
 		</tr>
 		<tr>
-			<td class="small-font system-default">ثبت</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td class="small-font system-default">نوع غیبت</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio"  classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx1" xclass="xm1" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx1" xclass="xm1" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx1" xclass="xm1" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx1" xclass="xm1" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx2" xclass="xm2" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx2" xclass="xm2" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx2" xclass="xm2" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx2" xclass="xm2" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx3" xclass="xm3" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx3" xclass="xm3" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx3" xclass="xm3" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx3" xclass="xm3" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx4" xclass="xm4" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx4" xclass="xm4" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx4" xclass="xm4" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx4" xclass="xm4" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx5" xclass="xm5" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx5" xclass="xm5" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx5" xclass="xm5" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx5" xclass="xm5" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx6" xclass="xm6" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx6" xclass="xm6" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx6" xclass="xm6" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx6" xclass="xm6" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx7" xclass="xm7" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx7" xclass="xm7" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx7" xclass="xm7" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx7" xclass="xm7" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx8" xclass="xm8" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx8" xclass="xm8" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx8" xclass="xm8" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx8" xclass="xm8" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx9" xclass="xm9" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx9" xclass="xm9" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx9" xclass="xm9" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx9" xclass="xm9" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
+			<td>
+				<div class="divGroup">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx10" xclass="xm10" xcolor="white" checked="checked" value="unjustified absence" xval="unjustifiedabsence"
+					 title="غیر موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx10" xclass="xm10" xcolor="#59c5c5" value ="justified absence"
+					xval="justifiedabsence" title="موجه">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx10" xclass="xm10" xcolor="#baf5ba" value="leave" xval="leave" title="مرخصی">
+					<input type="radio" classificationid="{{list.classificationid}}" name="absencetype{{list.username}}mx10" xclass="xm10" xcolor="#ffffc4" value= "delay" xval="delay" title="تاخیر">
+				</div>
+			</td>
 			<td class="normal-font bridge"><span>{{list.mobile}}</span></td>
 		</tr>
 	</tbody>
 	{%endfor%}
 </table>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	// $("a.unjustifiedabsence").click(function(){
+	// 	$(".divGroup").each(function(){
+	// 		$("input:radio", this).removeAttr("checked");
+
+	// 		$("input:radio", this).eq(0).attr("checked", "checked");
+	// 	});
+	// });
+
+	// $("a.justifiedabsence").click(function(){
+	// 	$(".divGroup").each(function(){
+	// 		$("input:radio", this).removeAttr("checked");
+	// 		$("input:radio", this).eq(1).attr("checked", "checked");
+	// 	});
+	// });
+
+	// $("a.leave").click(function(){
+	// 	$(".divGroup").each(function(){
+	// 		$("input:radio", this).removeAttr("checked");
+	// 		$("input:radio", this).eq(2).attr("checked", "checked");
+	// 	});
+	// });
+	// $("a.delay").click(function(){
+	// 	$(".divGroup").each(function(){
+	// 		$("input:radio", this).removeAttr("checked");
+	// 		$("input:radio", this).eq(3).attr("checked", "checked");
+	// 	});
+	// });
+
+	$("input[type=radio]").click(function(){
+		// $(this).cl
+		$(this).parents("td").css("background-color", $(this).attr("xcolor"));
+		_self = $(this);
+		$("a[classificationid="+$(this).attr("classificationid")+"]").each(function(){
+			// console.log($(this));
+			x1= $(_self).attr("xclass");
+			x2 = $(this).attr("xclass");
+			if(x1 == x2){
+				$(this).attr("type", $(_self).val());
+			}
+
+		});
+
+	});
+
+
+	$("body",this).find("input[date=date]").each(function(){
+		var _self = $(this);
+		$(this).persianDatepicker({
+			formatDate:"YYYY-MM-DD",
+			isRTL:false,
+			onSelect: function() {
+				set_attr(_self);
+			},
+			onChange: function(){
+			}
+
+		});
+
+	});
+
+	function set_attr(_self) {
+		// console.log(_self);
+		xclass = $(_self).attr("xclass");
+		val = $(_self).val();
+		$("a[xclass="+xclass+"]").each(function(){
+			$(this).attr("date", val);
+		});
+		// $("input[type=radio,xclass="+xclass+"]").
+	}
+
+	function convert_date(date) {
+		date = date.split("-");
+		var m,d,y;
+		y = date[0];
+		m = date[1];
+		d = date[2];
+		if(y.length == 4) y = y;
+		if(m < 10) {
+			m = "0" + m;
+		}
+		if(d < 10) {
+			d = "0" + d;
+		}
+		return y + "" + m + "" + d;
+	}
+
+	$("a.insertAbsenceApi", this).click(function(){
+		_self = $(this);
+		date = $(_self).attr("date");
+		// console.log(date);
+		if(typeof date == "undefined") {
+			xhr_error("تاریخ انتخاب نشده است");
+			return false;
+		}
+
+		classification = $(_self).attr("classificationid");
+
+		date = convert_date(date);
+		type = $(this).attr("type");
+
+		if(typeof type == "undefined"){
+			type = "unjustified absence";
+		}
+
+		xurl = "absence/api/classification=" + classification + "/date=" + date + "/type=" + type;
+
+		if($(_self).hasClass("insertAbsenceApi")){
+			$.ajax({
+				type: "POST",
+				url : xurl,
+				success : function(data){
+
+					xhr_result(data);
+					if(data.fatal){
+						$(_self).removeClass("icodadd insertAbsenceApi").addClass("icoredclose deleteAbsenceApi");
+					}else{
+						$(_self).removeClass("icodadd insertAbsenceApi").addClass("icoredclose deleteAbsenceApi");
+					}
+				}
+			});
+
+		}else if($(_self).hasClass("deleteAbsenceApi")){
+			$.ajax({
+				type: "POST",
+				url : "absence/apidelete/classification=" + classification + "/date=" + date,
+				success : function(data){
+					xhr_result(data);
+					if(data.fatal){
+						$(_self).removeClass("icoredclose deleteAbsenceApi").addClass("icodadd insertAbsenceApi");
+					}else{
+						$(_self).removeClass("icoredclose deleteAbsenceApi").addClass("icodadd insertAbsenceApi");
+					}
+				}
+			});
+		}
+		return false;
+	});
+
+
+});
+</script>

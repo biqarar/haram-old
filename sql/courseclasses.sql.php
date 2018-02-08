@@ -15,8 +15,8 @@ class courseclasses {
 		$this->form("select")->name("course_id")->class("notselect");
 		$this->setChild(function($q){
 			if(!isset($_SESSION['supervisor'])){
-				$list = isset($_SESSION['user']['branch']['selected']) ? 
-							  $_SESSION['user']['branch']['selected'] : array();
+				$list = isset($_SESSION['my_user']['branch']['selected']) ?
+							  $_SESSION['my_user']['branch']['selected'] : array();
 				$q->groupOpen();
 				foreach ($list as $key => $value) {
 					if($key == 0){
@@ -24,7 +24,7 @@ class courseclasses {
 					}else{
 						$q->condition("or","course.branch_id","=",$value);
 					}
-				}	
+				}
 				$q->groupClose();
 			}
 		});

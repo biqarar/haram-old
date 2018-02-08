@@ -16,6 +16,7 @@ class model extends main_model {
 			"family person.family",
 			"planname",
 			"mark",
+			"mark xmark",
 			"date_request date_request",
 			"date_print date_print",
 			"date_deliver date_deliver"
@@ -48,6 +49,8 @@ class model extends main_model {
 
 		})
 		->result(function($r){
+
+			$r->xmark = $this->sql(".certification", $r->xmark);
 
 			if($r->date_print == null) {
 				$r->date_print = $this->tag("a")->title("ثبت تاریخ چاپ")->style("cursor: pointer;")->certificationid($r->id)->class("icocalendar set-date-print")->dateNow($this->dateNow)->render();

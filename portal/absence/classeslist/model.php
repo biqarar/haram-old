@@ -4,7 +4,7 @@ class model extends main_model {
 		$absence_type = $this->absence_type();
 
 		$dtable = $this->dtable->table("classification")
-			
+
 			->fields("name person.name",
 					 "family person.family",
 					 "date_entry",
@@ -16,17 +16,17 @@ class model extends main_model {
 					 "usersid more")
 
 			->search_fields("name person.name", "family person.family")
-			
+
 			->query(function($q){
 
 				//--------------- CHECK BRANCH
 				$this->sql(".branch.classes", $this->xuId("classesid"));
 
-			
+
 				$q->andClasses_id($this->xuId("classesid"));
 
 				// $q = $this->classification_finde_active_list($q);
-				
+
 				$q->joinPerson()->whereUsers_id("#classification.users_id")
 								->fieldName("name")->fieldFamily("family")->fieldUsers_id("usersid");
 
@@ -67,7 +67,7 @@ class model extends main_model {
 				$r->more = $this->tag("a")
 									  ->addClass("icomore a-undefault")
 									  ->style("cursor: pointer;")
-									  ->href("users/learn/absence/id=" . $r->more)
+									  ->href("users/learn/absence/id=" . $r->more. '/classesid=0')
 									  ->render();
 
 			}, $absence_type);
@@ -78,16 +78,16 @@ class model extends main_model {
 	public function absence_type(){
 
 		$sql = new dbconnection_lib;
-		$x = $sql->query("SELECT COLUMN_TYPE FROM 
+		$x = $sql->query("SELECT COLUMN_TYPE FROM
 							INFORMATION_SCHEMA.COLUMNS
-						    WHERE TABLE_NAME = 'absence' 
+						    WHERE TABLE_NAME = 'absence'
 						    AND COLUMN_NAME = 'type'");
 
 		$x = $x->result->fetch_assoc();
 
 		$x = preg_replace("/enum|\(|\)|\'/", '', $x['COLUMN_TYPE']);
 		$x = preg_split("[,]", $x);
-		
+
 		return $x;
 	}
 }

@@ -33,9 +33,11 @@ class view extends main_view {
 		->addColFirst("family", "family")
 		->addColFirst("name", "name")
 		->addColFirst("id", "id")
-
+		->addColEnd("edit", "edit")
 		->compile();
+
 		foreach ($price['list'] as $key => $value) {
+			$price['list'][$key]['edit'] = $this->tag("a")->href("price/status=edit/id=".$price['list'][$key]['id'])->class("icoedit")->render();
 			$plan_id = $this->sql(".assoc.foreign", "classes", $price['list'][$key]['transactions'] , "plan_id");
 			$plan_name = $this->sql(".assoc.foreign", "plan", $plan_id , "name");
 

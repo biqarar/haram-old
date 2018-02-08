@@ -16,9 +16,9 @@ class price {
 	public $description  = array('type'=> 'text@' , "label" => "description");
 	public $status    	 = array('type'=> 'enum@active,void!active', "label" => "status");
 	public $visible    	 = array('type'=> 'int@1', "label" => "visible");
-	
+
 	public $foreign = array("title" => "price_change@id!name", "plan_id" => "plan@id!name");
-	
+
 	public function id(){
 		$this->validate("id");
 	}
@@ -35,9 +35,9 @@ class price {
 	public function title(){
 		$this->form("select")->name("title")->id("title")->addClass("select-title notselect")->label("type");
 		$this->setChild(function($q){
-			
-		// 	$list = isset($_SESSION['user']['branch']['selected']) ? 
-		// 				  $_SESSION['user']['branch']['selected'] : array();
+
+		// 	$list = isset($_SESSION['my_user']['branch']['selected']) ?
+		// 				  $_SESSION['my_user']['branch']['selected'] : array();
 		// 	$q->groupOpen();
 		// 	foreach ($list as $key => $value) {
 		// 		if($key == 0){
@@ -45,12 +45,12 @@ class price {
 		// 		}else{
 		// 			$q->condition("or","price_change.branch_id","=",$value);
 		// 		}
-		// 	}	
+		// 	}
 		// 	$q->groupClose();
 		// 	// $q->joinPrice_change()->whereId("#price.title")->fieldType('type');
 		}, function($child, $value){
 			// var_dump($value);exit();
-			$child->label(gettext($value['type']) . " > " .  $value['name'])->value($value['id']); 
+			$child->label(gettext($value['type']) . " > " .  $value['name'])->value($value['id']);
 		});
 	}
 
@@ -63,8 +63,8 @@ class price {
 		$this->form("select")->name("plan_id")->label("plan_id")->class("notselect");
 
 		$this->setChild(function($q){
-			$list = isset($_SESSION['user']['branch']['selected']) ? 
-						  $_SESSION['user']['branch']['selected'] : array();
+			$list = isset($_SESSION['my_user']['branch']['selected']) ?
+						  $_SESSION['my_user']['branch']['selected'] : array();
 			$q->groupOpen();
 			foreach ($list as $key => $value) {
 				if($key == 0){
@@ -72,10 +72,10 @@ class price {
 				}else{
 					$q->condition("or","plan.branch_id","=",$value);
 				}
-			}	
+			}
 			$q->groupClose();
 		}, function($child,$value){
-			$child->label($value['name'])->value($value['id']); 
+			$child->label($value['name'])->value($value['id']);
 		});
 	}
 
@@ -113,6 +113,6 @@ class price {
 		// $this->form("text")->name("card")->label("card")->pl("4 رقم آخر شماره کارت");
 		$this->validate()->number()->form->number("price visible is not valid");
 	}
-	
-}	
+
+}
 ?>

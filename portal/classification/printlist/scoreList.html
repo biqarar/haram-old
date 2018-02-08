@@ -22,6 +22,11 @@
         width:140px;
 
     }
+
+    .bridge
+    {
+        width: 118px;
+    }
     tbody{
         page-break-inside:avoid;
         page-break-after:auto;
@@ -54,7 +59,7 @@
         <td class="small-font system-default cls1" rowspan="2">ردیف</td>
         <td class="small-font system-default cls2" rowspan="2">نام و نام خانوادگی</td>
         <td class="small-font system-default cls3" rowspan="2">نام کاربری</td>
-        
+
         <td class="small-font">نوع امتیاز</td>
         {% for score_key, score in score_type %}
             <td class="small-font">{{score.title}}</td>
@@ -66,9 +71,9 @@
     </tr>
     <tr>
         <td class="small-font system-default cls4">تاریخ آزمون</td>
-        
+
         {% for score_key, score in score_type %}
-            <td class="small-font system-default cslc">&nbsp;&nbsp;&nbsp;&nbsp;/ &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="small-font system-default cslc"></td>
         {%endfor%}
     </tr>
     <!-- end of header -->
@@ -93,7 +98,7 @@
             {% for score_key, score in score_type %}
                  <td></td>
             {%endfor%}
-      
+
             <td class="normal-font bridge"><span>{{list.mobile}}</span></td>
         </tr>
     </tbody>

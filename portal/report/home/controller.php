@@ -1,13 +1,28 @@
-<?php  
+<?php
 class controller extends main_controller {
 
 	public $permission = array("report" => array("select" => array("public")));
 	public function config(){
 
 	$this->listen(array(
-			"url" => array("price", "status" => "reportpricelist")
+			"url" => array("plan", "progress", "id" => "/^\d+$/")
 			), function (){
-				save(array("report","price", "mod" => "reportpricelistr"));
+				save(array("report","plan", "progress" ));
+				$this->permission = array("report" => array("select" => array("public")));
+	});
+
+
+	$this->listen(array(
+			"url" => array("plan", "progress", "id" => "/^\d+$/", 'type' => 'all')
+			), function (){
+				save(array("report","plan", "progress" ));
+				$this->permission = array("report" => array("select" => array("public")));
+	});
+
+	$this->listen(array(
+			"url" => array("price", "status" => "reportpricelist", "session" => "/^\d+$/")
+			), function (){
+				save(array("report","price", "mod" => "reportpricelist"));
 				$this->permission = array("report" => array("select" => array("public")));
 	});
 		//---------------------------- bridge
@@ -57,6 +72,7 @@ class controller extends main_controller {
 
 			//---------------------------- bridge
 	$this->listen(array(
+			"max" => 5,
 			"url" => array("classes", "type" =>"personactive")
 			), function (){
 				save(array("report","classes","personactive"));
@@ -142,7 +158,7 @@ class controller extends main_controller {
 				save(array("report","classes","personstatus"));
 				$this->permission = array("report" => array("select" => array("public")));
 	});
-	
+
 	// ----------------------------
 	// $this->listen(array(
 	// 		"max" => 3,
@@ -160,7 +176,7 @@ class controller extends main_controller {
 				), function (){
 					save(array("report","classes"));
 					$this->permission = array("report" => array("select" => array("public")));
-		});	
+		});
 
 	//----------------------------
 	$this->listen(array(
@@ -170,7 +186,7 @@ class controller extends main_controller {
 					save(array("report","price"));
 					$this->permission = array("report" => array("select" => array("public")));
 		});
-	
+
 
 	//----------------------------
 	$this->listen(array(
@@ -179,7 +195,7 @@ class controller extends main_controller {
 				), function (){
 					save(array("report","price", "weekly"));
 					$this->permission = array("report" => array("select" => array("public")));
-		});	
+		});
 
 		//---------------------------- plan
 	$this->listen(array(
@@ -197,7 +213,7 @@ class controller extends main_controller {
 				), function (){
 					save(array("report","plan", "planstatus"));
 					$this->permission = array("report" => array("select" => array("public")));
-		});	
+		});
 
 		//----------------------------
 	$this->listen(array(
@@ -206,7 +222,7 @@ class controller extends main_controller {
 				), function (){
 					save(array("report","plan", "dateclassesbridge"));
 					$this->permission = array("report" => array("select" => array("public")));
-		});	
+		});
 	}
 }
-?>  
+?>

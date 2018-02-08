@@ -22,6 +22,9 @@ class main_view{
 		//$this->global->host = host;
 		//$this->global->ahost = host.path;
 
+
+		// $this->data->debug = DEBUG;
+
 		$menu =  new menu_cls;
 		$this->global->menu = $menu->list_menu();
 
@@ -107,7 +110,7 @@ class main_view{
 		$twig->addFilter($this->twig_fcache());
 		$twig->addFilter($this->twig_lang());
 		$twig->addFilter($this->twig_nameFamily());
-			
+
 	}
 	public function twig_fcache(){
 		return new Twig_SimpleFilter('fcache', function ($string) {
@@ -206,7 +209,7 @@ class main_view{
 	*/
 	public function detailLink($table = flase) {
 		return $this->link($table . "/status=detail/id=%id%", "href" , "icomore");
-	}  
+	}
 
 	 /**
 	 * make link to edit record table
@@ -242,6 +245,8 @@ class main_view{
 					array("title"=> "شهریه", 'url' =>"price/classes/classesid=" . $classesid),
 					array("title"=> "اطلاعات", 'url' =>"classes/status=detail/id=" . $classesid),
 					array("title"=> "اصلاح", 'url' =>"classes/status=edit/id=" . $classesid),
+					array("title"=> "نمودار", 'url' =>"classification/progress/id=" . $classesid),
+					array("title"=> "گزارش", 'url' =>"classification/report/id=" . $classesid),
 					// array("title"=> "چاپ", 'url' =>"classification/printlist/classesid=" . $this->xuId("classesid")),
 					)
 			);
@@ -252,10 +257,10 @@ class main_view{
 	public function classesDetail($classes_detail = false) {
 		// //------------------------------ get detail classes
 		if(isset(config_lib::$surl['classesid']) || (config_lib::$surl['status'] == 'detail')){
-			
+
 			$this->classeTopLinks();
 			//------------------------------ classes id
-			$classesid = (isset(config_lib::$surl['status']) 
+			$classesid = (isset(config_lib::$surl['status'])
 				&& config_lib::$surl['status'] == 'detail') ? $this->xuId() : config_lib::$surl['classesid'];
 
 			$classes_detail = $this->sql(".classesDetail", $classesid);
@@ -272,14 +277,14 @@ class main_view{
 	*/
 	public function detailClasses($classes_detail = false) {
 
-		if(isset($classes_detail['list'])){	
+		if(isset($classes_detail['list'])){
 			foreach ($classes_detail ['list'] as $key => $value) {
 				$classes_detail ['list'][$key]['plan_id']   = $this->sql(".assoc.foreign", "plan", $value["plan_id"], "name");
-				$classes_detail ['list'][$key]['teacher']   = 
-				$this->sql(".assoc.foreign", "person", $value["teacher"], "name", "users_id") . ' ' . 
+				$classes_detail ['list'][$key]['teacher']   =
+				$this->sql(".assoc.foreign", "person", $value["teacher"], "name", "users_id") . ' ' .
 				$this->sql(".assoc.foreign", "person", $value["teacher"], "family", "users_id");
 				$classes_detail ['list'][$key]['place_id']  = $this->sql(".assoc.foreign", "place", $value["place_id"], "name");
-			}	
+			}
 		}
 		return $classes_detail;
 	}
@@ -303,8 +308,8 @@ class main_view{
 
 	public function colPermission($table, $operat) {
 		if(global_cls::supervisor()) return true;
-		if(isset($_SESSION['user']['permission']['tables'][$table][$operat]) && 
-			$_SESSION['user']['permission']['tables'][$table][$operat] == 'public'){
+		if(isset($_SESSION['my_user']['permission']['tables'][$table][$operat]) &&
+			$_SESSION['my_user']['permission']['tables'][$table][$operat] == 'public'){
 			return true;
 		}
 		return false;
@@ -320,10 +325,10 @@ class main_view{
 	}
 
 	public function check_users_type($users_id = false) {
-		if($this->login() && isset($_SESSION['user']['type'])) {
+		if($this->login() && isset($_SESSION['my_user']['type'])) {
 			list($access, $msg) = $this->checkPermissions();
 			if(!$access){
-				if(($_SESSION['user']['type'] == "teacher" || $_SESSION['user']['type'] == "operator") && $_SESSION['user']['id'] != $users_id) {
+				if(($_SESSION['my_user']['type'] == "teacher" || $_SESSION['my_user']['type'] == "operator") && $_SESSION['my_user']['id'] != $users_id) {
 					page_lib::access("what are you looking for ?");
 				}
 			}

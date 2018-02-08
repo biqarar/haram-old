@@ -1,5 +1,4 @@
 route(/absence\/status=classeslist\/classesid=\d+/, function(){
-
 	$(".absence-date-main")[0].callBackDate =  function(){
 		date = convert_date($(this).val());
 	}
@@ -97,13 +96,18 @@ route(/absence\/status=classeslist\/classesid=\d+/, function(){
 
 	function convert_date(date) {
 		date = date.split("-");
-		if(date[0].length == 4) y = date[0];
-		if(date[1].length != 2) {
-			m = "0" + date[1];
+		var m,d,y;
+		y = date[0];
+		m = date[1];
+		d = date[2];
+		if(y.length == 4) y = y;
+		if(m < 10) {
+			m = "0" + m;
 		}
-		if(date[2].length != 2) {
-			d = "0" + date[2];
+		if(d < 10) {
+			d = "0" + d;
 		}
+	
 		return y + "" + m + "" + d;
 	}
 });	

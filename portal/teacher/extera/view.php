@@ -3,9 +3,10 @@
  * @author reza mohitit rm.biqarar@gmail.com
  */
 
-class view extends main_view{
-	public function config(){
-
+class view extends main_view
+{
+	public function config()
+{
 		//------------------------------ set global
 		$this->global->page_title =_("person_extera");
 
@@ -19,7 +20,7 @@ class view extends main_view{
 
 		//------------------------------ if person extera exist can not be add another record
 		$id = $this->sql("#person_extera_id", $users_id);
-		
+
 		//------------------------------ load person_extera form
 		$f = $this->form("@person_extera", (!$id) ? "add": "edit");
 

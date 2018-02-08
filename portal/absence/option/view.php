@@ -30,7 +30,7 @@ class view extends main_view {
 			$users_id = $this->xuId("usersid");
 
 			$this->topLinks(array(
-			array("title" => "نمایش", "url" => "users/learn/absence/id=$users_id"),
+			array("title" => "نمایش", "url" => "users/learn/absence/id=$users_id/classesid=0"),
 			array("title" => "ثبت", "url" => "absence/status=add/usersid=$users_id"),
 
 			));

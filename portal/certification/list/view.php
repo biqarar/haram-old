@@ -19,6 +19,7 @@ class view extends main_view{
 			"family",
 			"plan",
 			"mark",
+			"ارزیابی کیفی",
 			"date_request",
 			"date_print",
 			"date_deliver"

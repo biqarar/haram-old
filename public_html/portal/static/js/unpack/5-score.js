@@ -12,18 +12,8 @@ route(/score\/classes\/status=apilist\/classesid=\d+\/scoretypeid=\d+/, function
 		}
 	});
 
-	_warn = '<span class="status-warn" style="background: #FFECB3;
-	border: 1px solid #FFD54F;
-	padding: 3px 10px;
-	margin-right: 5px;
-	font-size: 12px;
-	display: inline-block;">تاریخ ثبت نشده است.</span>';
-	_fatal = '<span class="status-fatal" style="background: #FFCDD2;
-	border: 1px solid #E57373;
-	padding: 3px 10px;
-	margin-right: 5px;
-	font-size: 12px;
-	display: inline-block;">تاریخ ثبت نشده است.</span>';
+	_warn = '<span class="status-warn" style="background: #FFECB3;	border: 1px solid #FFD54F;	padding: 3px 10px;	margin-right: 5px;	font-size: 12px;	display: inline-block;">تاریخ ثبت نشده است.</span>';
+	_fatal = '<span class="status-fatal" style="background: #FFCDD2;	border: 1px solid #E57373;	padding: 3px 10px;	margin-right: 5px;	font-size: 12px;	display: inline-block;">تاریخ ثبت نشده است.</span>';
 	_true = '<span class="icolikes" style="margin-right: 5px;padding: 0;display: inline-block;"></span>';
 
 	$('.score-mark', this).change(function(){
@@ -63,9 +53,9 @@ route(/score\/classes\/status=apilist\/classesid=\d+\/scoretypeid=\d+/, function
 		});
 		$(this).removeAttr('disabled');
 
-		return false;		
+		return false;
 	});
-});	
+});
 function insert_(a) {
 	x = $("#calculation").html()
 	$("#calculation").html(x + '=' + $(a).html() + '=');

@@ -1,0 +1,178 @@
+{# reza mohiti #}
+
+{% extends layout %}
+{% block content %}
+<style type="text/css">
+
+	table td, table th {
+		border: 1px solid #f0f9f0 ;
+		padding: 1px !important;
+		text-align: center;
+	}
+
+
+	.class-details {
+		padding: 5px 10px;
+	}
+
+	.class-detail {
+		float: right;
+		margin-left: 35px;
+	}
+
+	.class-detail-title, .class-detail-value {
+		display: inline-block;
+		padding: 5px;
+		font-family: 'WYekan';
+	}
+
+	.hide
+	{
+		display: none;
+	}
+	.show
+	{
+		display: block;
+	}
+	*
+	{
+		font-family: "WYekan";
+
+	}
+	.first-td
+	{
+		width: 650px !important;
+	}
+
+	table td{
+		font-size: 12px;
+	}
+	/*div.header-table{
+	    margin: 0;
+	    padding: 5px;
+	    color: #fff;
+	    text-shadow: #2665a7 1px 1px 1px;
+	    border: 1px solid #4a8fd6;
+	    background-color: #5c9ada;
+	}*/
+	tbody{
+		page-break-inside:avoid;
+		page-break-after:auto;
+		border-collapse: collapse;
+		/*display:table;*/
+		}
+
+		table {
+			width: 100%;
+			direction: rtl;
+		}
+
+		tr:nth-child(2n) {
+			background: #eee;
+		}
+
+		td, th {
+			padding: 5px;
+			border: 1px solid #eee;
+			font-size: 10px;
+		}
+
+	@media print{
+		@page {
+			size : a4 landscape !important;
+		}
+		.header-portal,.thin-line,.menu, .hr-portal, li.ui-tabs-active, li.ui-state-default, ul.ui-tabs-nav, .logo, .avatar, .title, .top-tape
+		{
+			display: none;
+		}
+		#tabs > div, #tabs > ul {
+			border: none;
+		}
+		.wrapper
+		{
+			display: block;
+			height: 100%;
+			width: 100%;
+			padding: 0px;
+			margin: 0px;
+		}
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		div.classes{
+			display: block;
+		}
+		.class-detail
+		{
+			font-size: 12px;
+		}
+
+	}
+
+</style>
+<script type="text/javascript" src="/portal/static/js/highchart/highcharts.js"></script>
+<script type="text/javascript" src="/portal/static/js/highchart/exporting.js"></script>
+<script src="/portal/static/js/bootstrap-checkbox.js" defer></script>
+
+<div class="classes">
+</div>
+<h4>گزارش از وضعیت کلاس</h4>
+<div class="header-table">
+	<h5>مشخصات کلاس</h5>
+	<div class="class-details colory">
+	{% for key, header in classes_detail.header %}
+	<div class="class-detail normal-font">
+		<div class="class-detail-title">{{header|lang}}:</div>
+		<div class="class-detail-value"><b>{{classes_detail.list[0][key]|lang}}</b></div>
+	</div>
+	{%endfor%}
+		<div style="clear:both"></div>
+	</div>
+</div>
+<span id="plus" class="hr-portal" style="cursor: pointer; color: blue;" title="مشاهده اطلاعات استاد">+</span>
+
+<div class="class-details colory hide" id="teacher-detail">
+<hr class="hr-portal">
+<h5>مشخصات استاد</h5>
+	{% for key, header in teacher_detail.header %}
+	<div class="class-detail normal-font">
+		<div class="class-detail-title">{{header|lang}}:</div>
+		<div class="class-detail-value"><b>{{teacher_detail.list[0][key]|lang}}</b></div>
+	</div>
+	{%endfor%}
+	<div style="clear:both"></div>
+</div>
+<hr class="hr-portal">
+<table>
+	<tr><td class="first-td" colspan="2"><h5>وضعیت ورودی و خروجی کلاس</h5></td></tr>
+	<tr><td class="first-td">تعداد ورودی</td><td>{{intro}} نفر</td></tr>
+	<tr><td class="first-td">تعداد انصرافی</td><td>{{exit_class}} نفر</td></tr>
+	<tr><td class="first-td">تعداد انتقالی از این کلاس</td><td>{{move_classification}} نفر</td></tr>
+
+	<tr><td class="first-td">تعداد افراد باقیمانده در پایان کلاس</td><td>{{end_class}} نفر</td></tr>
+	<tr><td class="first-td">درصد باقیمانده در کلاس</td><td>
+	<div style="width: {{end_class_100}}%;	border-radius: 5px;	background-color: #59C5C5;">{{end_class_100}} ٪</div></td></tr>
+	<tr><td class="first-td" colspan="2"><h5>وضعیت نمرات و قبولی کلاس</h5></td></tr>
+	<tr><td class="first-td">معدل کل آزمون پایانی</td><td>{{moadele_kol}}</td></tr>
+	<tr><td class="first-td">معدل کل نمرات کلاسی</td><td>{{moadele_class}}</td></tr>
+	<tr><td class="first-td">تعداد قبولی</td><td>{{qaboli}}</td></tr>
+	<tr><td class="first-td">تعداد مردودی</td><td>{{mardodi}}</td></tr>
+	<tr><td class="first-td">درصد قبولی کلاس</td><td>
+
+	<div style="width: {{qaboli_100}}%;	border-radius: 5px;	background-color: #59C5C5;">{{qaboli_100}} ٪</div>
+	</td></tr>
+	<tr><td class="first-td" colspan="2"><h5>تعداد جلسات </h5></td></tr>
+	<tr><td class="first-td">تعداد جلسات آیین نامه</td><td>{{aeenname}}</td></tr>
+	<tr><td class="first-td">تعداد جلسات برگزار شده
+	<a class="small">-محاسبه شده با تعداد روز های ثبت نمرات کلاسی</a></td><td>{{bargozarshode}}</td></tr>
+	<tr><td>درصد جلسات برگزار شده</td><td>
+	<div style="width: {{bargozarshode_100}}%;	border-radius: 5px;	background-color: #59C5C5;">{{bargozarshode_100}} ٪</div></td></tr>
+</table>
+
+<script type="text/javascript">
+	$( "#plus" ).click(function() {
+  $( "#teacher-detail" ).toggleClass( "hide" );
+});
+</script>
+{%endblock%}

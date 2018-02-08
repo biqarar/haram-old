@@ -14,7 +14,7 @@ class view extends main_view{
 		// var_dump($list);exit();
 		$this->global->url = config_lib::$url;
 		$list['title'] = "لیست درآمد  - 
-							گزارش مالی  هفتگی -
+							گزارش مالی  -
 							از تاریخ $start_date تا تاریخ $end_date  ";
 		if($this->xuId("xlsx") == 1) {
 			$this->sql(".xlsx", $list, $list['title'], $start_date .'-'. $end_date);

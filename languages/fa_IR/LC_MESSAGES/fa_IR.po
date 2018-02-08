@@ -17,6 +17,69 @@ msgstr "ماشین نیستم!"
 #
 #  START TRANSLATION MENU
 #
+msgid "move"
+msgstr "انتقال"
+
+msgid "endofterm"
+msgstr "پایان ترم"
+
+msgid "string_time"
+msgstr "ساعات آموزشی به حروف"
+
+msgid "classroom"
+msgstr "کلاسی"
+
+msgid "plan_status"
+msgstr "ثبت نام اینترنتی"
+
+msgid "open"
+msgstr "باز"
+
+msgid "close"
+msgstr "بسته"
+
+msgid "full"
+msgstr "ظرفیت تکمیل"
+
+msgid "plan_type"
+msgstr "مجوز ثبت نام"
+
+msgid "free"
+msgstr "آزاد"
+
+msgid "test"
+msgstr "تست"
+
+msgid "exam"
+msgstr "آزمون"
+
+msgid "plan_absence_type"
+msgstr "روش محاسبه غیبت مجاز"
+
+msgid "hefz_race_date"
+msgstr "تاریخ"
+
+msgid "hefz_race_time"
+msgstr "ساعت"
+
+msgid "hefz_race_place"
+msgstr "مکان"
+
+msgid "very good"
+msgstr "خیلی خوب"
+
+msgid "good"
+msgstr "خوب"
+
+msgid "acseptable"
+msgstr "قابل قبول"
+
+msgid "plan_meeting_no"
+msgstr "تعداد جلسات"
+
+msgid "hefz_group_name"
+msgstr "گروه"
+
 msgid "race_hefz"
 msgstr "مسابقه"
 
@@ -31,9 +94,6 @@ msgstr "تیم دوم"
 
 msgid "hefz_race_name"
 msgstr "نام مسابقه"
-
-msgid "hefz_race_place"
-msgstr "مکان مسابقه"
 
 msgid "hefz_race_type"
 msgstr "نوع دیدار"
@@ -1257,7 +1317,7 @@ msgid "max_person"
 msgstr "حداکثر اعضا"
 
 msgid "meeting_no"
-msgstr "تعداد جلسات"
+msgstr "ساعات آموزشی"
 
 msgid "min_person"
 msgstr "حداقل اعضا"
@@ -1882,7 +1942,7 @@ msgid "classes_id"
 msgstr "کلاس"
 
 msgid "classes_meeting_no"
-msgstr "تعداد جلسات"
+msgstr "ساعات آموزشی"
 
 msgid "classes_teacher"
 msgstr "نام استاد"

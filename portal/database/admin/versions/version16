@@ -1,0 +1,13 @@
+
+			"ALTER TABLE `hefz_race` ADD `result1` FLOAT NULL AFTER `presence2`",
+			"ALTER TABLE `hefz_race` ADD `result2` FLOAT NULL AFTER `result1`",
+			"ALTER TABLE `hefz_race` ADD `rate1` int(1) NULL AFTER `result2`",
+			"ALTER TABLE `hefz_race` ADD `rate2` int(1) NULL AFTER `rate1`",
+						"ALTER TABLE `plan` ADD `status` ENUM('open','close','full') NULL DEFAULT 'close' AFTER `absence_type`",
+			"ALTER TABLE `plan` ADD `type` ENUM('free','test','exam') NULL DEFAULT 'test' AFTER `status`",
+			"ALTER TABLE `classes` CHANGE `meeting_no` `meeting_no` SMALLINT(5) NULL DEFAULT NULL COMMENT 'تعداد جلسه';",
+			"ALTER TABLE `score_type` ADD `type` ENUM('endofterm','classroom') NULL DEFAULT 'endofterm' AFTER `plan_id`",
+			"ALTER TABLE `score` ADD `date` DATE NULL AFTER `score_type_id`",
+			"ALTER TABLE `quran_hadith`.`score` DROP INDEX `unique_index`, ADD UNIQUE `unique_index` (`classification_id`, `score_type_id`, `date`) USING BTREE;",
+			"ALTER TABLE `absence` ADD `status` ENUM('enable','disable','deleted') NOT NULL DEFAULT 'enable' AFTER `because`",
+			"ALTER TABLE `score_type` ADD `status` ENUM('enable','disable') NOT NULL DEFAULT 'enable' AFTER `description`;",

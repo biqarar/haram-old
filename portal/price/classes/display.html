@@ -9,5 +9,15 @@
 <div class="class-detail">
 	{{dtable.make(dataTable)}}
 </div>
-
+{%if price_permission%}
+<hr>
+<h3><a style="color: red">هشدار!</a>
+<br>
+ثبت شهریه گروهی</h3>
+<h4>با تکمیل فرم زیر و ثبت شهریه برای <a style="color :green;"> تمامی افراد فعال</a> این کلاس شهریه مورد نظر ثبت خواهد شد.</h4>
+<h4>لطفا در ثبت شهریه دقت فرمایید و حتما توضیحات لازم را در قسمت توضیحات وارد نمایید.</h4>
+<form class="ajx" method="post" action="price/classes/classesid={{classesid}}" >
+	{{forms.make(form.price)}}
+</form>
+{%endif%}
 {%endblock%}

@@ -9,15 +9,15 @@ class model extends main_model {
 	}
 
 	public function post_selectbranch() {
-		
+
 		$branch_id = false;
-		
+
 		if(post::logout()) {
-		
+
 			$this->redirect("logout");
-		
+
 		}else{
-			if(isset($_SESSION['supervisor']) AND 
+			if(isset($_SESSION['supervisor']) AND
 				preg_match("/^supervisor\_".$_SESSION['supervisor']."$/",post::select_branch())){
 				$_POST['supervisor'] = $this->sql_get_username($_SESSION['supervisor']);
 			}
@@ -30,22 +30,22 @@ class model extends main_model {
 					$this->sql(".login", $username->assoc('id'));
 
 					$_SESSION['supervisor'] = $supervisor_id;
-				
+
 					$this->redirect("profile");
 
 				}else{
 
 					debug_lib::fatal("نام کاربری یافت نشد");
 				}
-			
+
 			}elseif(post::select_branch()){
-		
+
 				$branch_id = $this->sql(".branch.check", post::select_branch());
 			}
-		
+
 			if($branch_id && $branch_id != null) {
-				
-				$_SESSION['user']['branch']['selected'][] = $branch_id;
+
+				$_SESSION['my_user']['branch']['selected'][] = $branch_id;
 
 				$this->sql(".login", $this->login("id"));
 
@@ -55,10 +55,10 @@ class model extends main_model {
 					$this->redirect($redirect);
 				}else{
 					$this->redirect("profile");
-				}	
-			
+				}
+
 			}else{
-				$this->redirect("login");			
+				$this->redirect("login");
 			}
 
 		}

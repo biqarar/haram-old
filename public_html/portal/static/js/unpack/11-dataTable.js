@@ -49,7 +49,7 @@ function dTable_each(){
 			}
 		},
 		"order": [[ 0, "asc" ]],
-		"lengthMenu": [[10, 25, 50], [10, 25, 50]],
+		"lengthMenu": [[10, 25, 50,100,500], [10, 25, 50,100,500]],
 		"createdRow": function ( row, data, index ) {
 			$(row).data('copire-data', data);
 			$('*',row).persian_nu();

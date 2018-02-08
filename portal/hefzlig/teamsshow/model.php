@@ -4,7 +4,7 @@
  */
 class model extends main_model {
 
-	public function post_listapi(){
+	/*public function post_listapi(){
 		$dtable = $this->dtable->table("hefz_teams")
 		->fields('id', 'ligname', 'min_person','max_person','name','hefz','teachefamily', "id edit")
 		->search_fields("name" , "ligname hefz_ligs.name" , "teacher person.teachefamily")
@@ -75,7 +75,7 @@ class model extends main_model {
 		//------------------------------ update code
 		$this->rollback(function() {
 			debug_lib::fatal("[[update teams failed]]");
-		});
+		});*/
 	}
 
 }

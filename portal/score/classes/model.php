@@ -1,33 +1,41 @@
 <?php
-class model extends main_model {
+class model extends main_model
+{
 
-	public function post_api() {
+	public function post_api()
+	{
 
-		
 		$array = array("usersid more",
 					 "username users.username",
-					 "name person.name", 
+					 "name person.name",
 					 "family person.family",
 					 "id retest",
-					 "id input", 
+					 "id input",
 					 "id xmore");
-		// var_dump("fuck");exit();
-	
 		$dtable = $this->dtable->table("classification")
 			->fields($array)
 			->search_fields("username users.username","name person.name", "family person.family")
-			->order(function($q, $n, $b){
-				if($n === 'orderUsername'){
+			->order(function($q, $n, $b)
+			{
+				if($n === 'orderUsername users.username')
+				{
 					$q->join->users->orderUsername($b);
-				}elseif($n === 'orderName'){
-					$q->join->person->orderNamee($b);
-				}elseif($n === 'orderFamily'){
+				}
+				elseif($n === 'orderName person.name')
+				{
+					$q->join->person->orderName($b);
+				}
+				elseif($n === 'orderFamily person.family')
+				{
 					$q->join->person->orderFamily($b);
-				}else{
+				}
+				else
+				{
 					return true;
 				}
 			})
-			->query(function($q){
+			->query(function($q)
+			{
 				//------------------- check branch
 				$y = $this->sql(".branch.classes", $this->xuId("classesid"));
 
@@ -38,17 +46,19 @@ class model extends main_model {
 				// echo $q->select()->string();exit();
 
 			})
-			->search_result(function($result){
+			->search_result(function($result)
+			{
 				$vsearch = $_POST['search']['value'];
 				$vsearch = str_replace(" ", "_", $vsearch);
 				$result->condition("and", "##concat(person.name, person.family)", "LIKE", "%$vsearch%");
 			})
-			->result(function($r){
+			->result(function($r)
+			{
 
 				$xMore = $this->tag("a")->class("icomore")
 				->tabindex(-1)->href("users/learn/score/id=".$r->more."/classificationid=". $r->retest)
 				->render();
-				
+
 				// var_dump($r->show);exit();
 				$xInput ="<div class='form-element' >" .  $this->tag("input")
 									  ->type("text")
@@ -62,21 +72,25 @@ class model extends main_model {
 				$r->input =  $xInput;
 				$r->retest =  $xCheckbox;
 				$r->xmore = $xMore;
-				
+
 				$r->more = $this->tag("a")->class("icomore")
 				->tabindex(-1)->href("users/status=detail/id=". $r->more)->render();
 			});
 			$this->sql(".dataTable", $dtable);
 	}
 
-	public function get_value($classificationid = false, $scoretypeid = false) {
+	public function get_value($classificationid = false, $scoretypeid = false)
+	{
 		$check = $this->sql()->tableScore()
 					->whereClassification_id($classificationid)
 					->andScore_type_id($scoretypeid)->limit(1)->select();
 					// var_dump($check->assoc("value")); exit();
 			return $check->assoc("value");
-		if($check->num() == 1) {
-		}else{
+		if($check->num() == 1)
+		{
+		}
+		else
+		{
 			return;
 		}
 	}

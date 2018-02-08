@@ -1,9 +1,10 @@
-<?php 
+<?php
 /**
  * @author reza mohitit rm.biqarar@gmail.com
  */
 class model extends main_model{
-	public function sql_find_teacher_name($users_id = 0) {
+	public function sql_find_teacher_name($users_id = 0)
+	{
 
 		//----------------- check branch
 		$this->sql(".branch.person", $users_id);
@@ -12,10 +13,12 @@ class model extends main_model{
 		return $return['name'] . ' ' . $return['family'];
 	}
 
-	public function makeQuery() {
-			
+	public function makeQuery()
+	{
+
 		$week_days = post::week_days();
-		if(!empty($week_days) && is_array($week_days)){
+		if(!empty($week_days) && is_array($week_days))
+		{
 			$week_days = join($week_days, ",");
 		}
 
@@ -25,12 +28,15 @@ class model extends main_model{
 		// echo $this->sql(".branch.place",post::place_id()) . "\n";
 		// echo $this->sql(".branch.users",post::teacher(), $branch_id) . "\n";
 		// exit();
-		if($branch_id == $this->sql(".branch.place",post::place_id())){	
+		if($branch_id == $this->sql(".branch.place",post::place_id()))
+		{
 			$this->sql(".branch.users",post::teacher(), $branch_id);
-		}else{
+		}
+		else
+		{
 			debug_lib::fatal("branch, place and teacher branch not mathc");
 		}
-		
+
 
 		//------------------------------ make sql object
 		return $this->sql()->tableClasses()
@@ -51,25 +57,34 @@ class model extends main_model{
 				->setStatus("ready");
 	}
 
-	public function post_add_classes() {
+	public function post_add_classes()
+	{
 		//------------------------------ check duplicate classes
 		$this->check_duplication("insert");
 
 		//------------------------------ insert classes
 		$sql = $this->makeQuery()->insert();
-
+		$insert_id = $sql->LAST_INSERT_ID();
 		//------------------------------ commit code
-		$this->commit(function() {
-			debug_lib::true("[[insert classes successful]]");
-		});
+		$this->commit(function($insert_id)
+		{
+			$link = $this->tag("a")
+				->href("classification/class/classesid=".$insert_id)
+				->vtext("اطلاعات کلاس با موفقیت ثبت شد.\n کد کلاس : $insert_id ")
+				->style("color:blue")
+				->render();
+			debug_lib::true($link);
+		},$insert_id);
 
 		//------------------------------ rollback code
-		$this->rollback(function() {
+		$this->rollback(function()
+		{
 			debug_lib::fatal("[[insert classes failed]]");
 		});
 	}
 
-	public function post_edit_classes() {
+	public function post_edit_classes()
+	{
 
 		//---------------------- chekc branch
 		$this->sql(".branch.classes", $this->xuId());
@@ -80,19 +95,22 @@ class model extends main_model{
 		//------------------------------ update classes
 		$sql = $this->makeQuery()->whereId($this->xuId())->update();
 
-		
+
 		//------------------------------ commit code
-		$this->commit(function() {
+		$this->commit(function()
+		{
 			debug_lib::true("[[update classes successful]]");
 		});
 
 		//------------------------------ rollback code
-		$this->rollback(function() {
+		$this->rollback(function()
+		{
 			debug_lib::fatal("[[update classes failed]]");
 		});
 	}
 
-	public function check_duplication($type = false) {
+	public function check_duplication($type = false)
+	{
 		//------------------------------ duplicate key
 		$duplicate = false;
 
@@ -142,47 +160,62 @@ class model extends main_model{
 
 		$class->joinPlan()->whereId("#classes.plan_id");
 		//---------- get branch id in the list
-		foreach ($this->branch() as $key => $value) {
-			if($key == 0){
+		foreach ($this->branch() as $key => $value)
+		{
+			if($key == 0)
+			{
 				$class->condition("and", "plan.branch_id","=",$value);
-			}else{
+			}
+			else
+			{
 				$class->condition("or","plan.branch_id","=",$value);
 			}
 		}
 		$class->joinPlace()->whereId("#classes.place_id")->fieldMulticlass();
 		$class = $class->select();
-				
+
 		//------------------------------  if in this place classes and ready or running
-		if($class->num() > 0 ) {
+		if($class->num() > 0 )
+		{
 
 			$allClass = $class->allAssoc();
-			
-			foreach ($allClass as $key => $value) {
+
+			foreach ($allClass as $key => $value)
+			{
 
 				//------------------------------ save duplicate detail to show
 				$classes_detail = $value;
 					//------------------------------ check week days of exist classes and request classes
 					$week_days_exist = (preg_match("/\,/", $value['week_days'])) ? preg_split("/\,/", $value['week_days']) : array();
 
-					foreach ($week_days as $k => $v) {
-						
-						if(preg_grep("/" . $v . "/", $week_days_exist)) {
+					foreach ($week_days as $k => $v)
+					{
+
+						if(preg_grep("/" . $v . "/", $week_days_exist))
+						{
 
 							//------------------------------ check time of exist classes and request classes
 							$start_time_exist = $this->convert_time($value['start_time']);
 							$end_time_exist = $this->convert_time($value['end_time']);
 
-							if ($end_time_exist > $start_time && $start_time_exist < $end_time) {
+							if ($end_time_exist > $start_time && $start_time_exist < $end_time)
+							{
 
-								//------------------------------ duplicate item here !!! 
+								//------------------------------ duplicate item here !!!
 								//------------------------------ can not insert or update classes
-								if($type == "update" && $this->xuId() == $value['id']){
+								if($type == "update" && $this->xuId() == $value['id'])
+								{
 									//------------------------------ himself
-									$duplicate = false;	
-								}elseif($value['multiclass'] == 'yes'){
+									$duplicate = false;
+								}
+								elseif
+									($value['multiclass'] == 'yes')
+								{
 									//------------------------------ multiclass
 									$duplicate = false;
-								}else{
+								}
+								else
+								{
 									//------------------------------ duplicate
 									$duplicate = true;
 								}
@@ -191,16 +224,19 @@ class model extends main_model{
 						if($duplicate) break;
 					}
 				if($duplicate) break;
-			}	
+			}
 		}
 
-		if($duplicate) {
+		if($duplicate)
+		{
 			debug_lib::fatal(
 				" اطلاعات این کلاس با کلاس شماره "
 				. $classes_detail['id'] .
-				" تداخل دارد، لطفا بررسی کنید " 
+				" تداخل دارد، لطفا بررسی کنید "
 				);
-		}else{
+		}
+		else
+		{
 			$new_classes = array();
 			$new_classes['start_date'] = $start_date;
 			$new_classes['end_date']   = $end_date;
@@ -209,29 +245,36 @@ class model extends main_model{
 			$new_classes['week_days']  = $week_days;
 			$new_classes['classes_id'] = $this->xuId("id");
 			list($duplicate, $msg) = $this->sql(".duplicateUsersClasses.teacher" , post::teacher() , $new_classes);
-			if($duplicate){
+			if($duplicate)
+			{
 				debug_lib::fatal(
 				" استاد در این ساعت در کلاس شماره "
 				. $msg .
-				" تدریس دارد " 
+				" تدریس دارد "
 				);
 			}
 
 		}
 	}
 
-	public function convert_time($time = false) {
+	public function convert_time($time = false)
+	{
 		$nTime = preg_replace("/\:|\s|\-/", "", $time);
-		if(strlen($nTime) < 6) {
+		if(strlen($nTime) < 6)
+		{
 			$nTime = $nTime . "00";
 		}
 		return intval($nTime);
 	}
 
-	public function convert_date($date = false) {
-		if (!preg_match("/^(\d{4})(\-|\/|)(\d{1,2})(\-|\/|)(\d{1,2})$/", $date, $nDate)) {
+	public function convert_date($date = false)
+	{
+		if (!preg_match("/^(\d{4})(\-|\/|)(\d{1,2})(\-|\/|)(\d{1,2})$/", $date, $nDate))
+		{
 			return false;
-		}else{
+		}
+		else
+		{
 			$date = $nDate[1]
 			.
 			((intval($nDate[3]) < 10) ? "0".intval($nDate[3]) : intval($nDate[3]))
@@ -244,7 +287,8 @@ class model extends main_model{
 	/**
 	* @return array (liset of users whit teacher type)
 	*/
-	function sql_users_name_family() {
+	function sql_users_name_family()
+	{
 // var_dump("fuc");exit();
 		$x = $this->sql()->tableUsers();
 		$x->whereType('teacher');
@@ -254,18 +298,23 @@ class model extends main_model{
 		$x->joinUsers_branch()->whereUsers_id("#users.id");
 
 		//---------- get branch id in the list
-		foreach ($this->branch() as $key => $value) {
-			if($key == 0){
+		foreach ($this->branch() as $key => $value)
+		{
+			if($key == 0)
+			{
 				$x->condition("and", "users_branch.branch_id","=",$value);
-			}else{
+			}
+			else
+			{
 				$x->condition("or","users_branch.branch_id","=",$value);
 			}
 		}
-		
+
 		$y = $x->select()->allAssoc();
 
 		$ret = array();
-		foreach ($y as $key => $value) {
+		foreach ($y as $key => $value)
+		{
 			$ret[$value['users_id']] = $value;
 		}
 		return $ret;

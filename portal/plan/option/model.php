@@ -15,12 +15,15 @@ class model extends main_model{
 				->setName(post::name())
 				->setPrice(post::price())
 				->setAbsence(post::absence())
+				->setAbsence_type(post::absence_type())
 				->setCertificate(post::certificate())
 				->setMark(post::mark())
 				->setBranch_id($this->post_branch())
 				->setMin_person(post::min_person())
-				->setMax_person(post::max_person());
-				// ->setPayment_count(post::payment_count())
+				->setMax_person(post::max_person())
+				->setStatus(post::status())
+				->setType(post::type())
+				->setMeeting_no(post::meeting_no());
 				// ->setExpired_price(post::expired_price());
 	}
 

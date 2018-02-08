@@ -29,12 +29,15 @@ class view extends main_view{
 				"name",
 				"price",
 				"absence",
+				"روش محاسبه",
 				"certificate",
 				"mark",
 				"min_person",
 				"max_person",
-				// "expired_price",
-				// "payment_count",
+				"meeting_no",
+				"ثبت نام ایینترنتی",
+				"مجوز ثبت نام",
+				"وضعیت",
 				"edit"));
 	}
 }

@@ -1,9 +1,11 @@
-<?php 
+<?php
 /**
- * 
+ *
  */
-class view extends main_view  {
-	public function config() {
+class view extends main_view
+{
+	public function config()
+	{
 		//------------------------------  global
 		$this->global->page_title = "users_detail";
 
@@ -17,7 +19,7 @@ class view extends main_view  {
 		$person = $this->sql(".list.card", "person", $users_id, "users_id");
 		unset($person['addLink']);
 		unset($person['editLink']);
-			
+
 		$person["moreLink"] = "teacher/person/status=detail/usersid=" . $users_id;
 		$this->data->person = $person;
 
@@ -26,7 +28,8 @@ class view extends main_view  {
 		$bridge = $this->sql("#bridge_detail" , $users_id);
 		$new_bridge = array();
 		$i = 1;
-		foreach ($bridge as $key => $arrayValue) {
+		foreach ($bridge as $key => $arrayValue)
+		{
 			if($i <= 5){
 				$new_bridge["list"]['list'][0][$arrayValue['title']] = $arrayValue['value'];
 			}
@@ -46,8 +49,8 @@ class view extends main_view  {
 			unset($person_extera['moreLink']);
 			$person_extera["editLink"] = "teacher/extera/status=add/usersid=$users_id";
 			// $person_extera["moreLink"] = "teacher/extera/status=detail/usersid=$users_id";
-			$this->data->person_extera = $person_extera;		
+			$this->data->person_extera = $person_extera;
 		}
 	}
-} 
+}
 ?>

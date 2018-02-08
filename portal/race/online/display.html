@@ -1,0 +1,211 @@
+{# reza mohiti #}
+{% extends layout %}
+{% block body %}
+
+<script type="text/javascript">
+
+	function show_chart() {
+		
+		team2name = "{{team2name.name}}";
+		team1name = "{{team1name.name}}";
+
+		team2data = JSON.parse('{{team2data|raw}}');
+		team1data = JSON.parse('{{team1data|raw}}');
+
+		$(function () {
+		    $('#team2').highcharts({
+		        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            type: 'pie'
+		        },
+		        title: {
+		            text: team2name
+		        },
+		        tooltip: {
+		            pointFormat: '{{team2.name}}'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: false,
+		                    format: '{point.percentage:.1f} ',
+		                    style: {
+		                        // color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            name: 'امتیاز',
+		            colorByPoint: true,
+		            data: team2data
+		        }]
+		    });
+
+
+		    ///////////////////////////////////////////////////
+		    $('#team1').highcharts({
+		        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            type: 'pie'
+		        },
+		        title: {
+		            text: team2name
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: false,
+		                    // format: '{point.percenta/ge:.1f} ',
+		                }
+		            }
+		        },
+		        series: [{
+		            name: 'امتیاز',
+		            colorByPoint: true,
+		            data: team1data
+		        }]
+		    });
+		});
+		setTimeout(function(){location.reload()},5000);
+		// setTimeout(function(){show_chart()},5000);
+	}
+	show_chart();
+
+	
+</script>
+	
+<script type="text/javascript" src="/portal/static/js/highchart/highcharts.js"></script>
+<script type="text/javascript" src="/portal/static/js/highchart/exporting.js"></script>
+
+<script src="/portal/static/js/bootstrap-checkbox.js" defer></script>
+<!-- <input type="checkbox"> -->
+<center>
+	<dir style="font-family:'WYekan'; font-size:20px;margin:0px;">مسابقات گروهی {{ligname}}</dir>
+	<!-- <dir style="font-family:'WYekan'">نمایش بر خط نتایج مسابقه</dir> -->
+	<dir id="title">
+		<span class="right">
+			<h1>
+			{{team2name.name}}
+			</h1>
+		</span>
+
+		<span class="left">
+			<h1>
+			{{team1name.name}}
+			</h1>
+		</span>
+	</dir>
+	<br>
+	<br>
+	<div id="team2" class="x-chart"></div>
+	<div id="team1" class="x-chart chart-left" ></div>
+	
+</center>
+<span class="main_rate">{{team2rate}}  </span>
+<span class="main_rate" style="margin-right:632px;"> - </span>
+
+<span class="main_rate" style="margin-right:685px;">{{team1rate}}</span>
+
+<span class="main_result">{{team2result}}</span>
+<span class="main_result" style="margin-right:838px;">{{team1result}}</span>
+
+<span class="telavat">{{telavat}}</span>
+<dir style="clear:both"></dir>
+
+
+
+<!-- css -->
+<style type="text/css">
+.telavat {
+	margin-top: 500px;
+    position: absolute;
+    margin-right: 608px;
+    text-align: center;
+    font-size: 35px;
+    color:green;
+    /*background-color: rgba(0,255,0,0.3);*/
+    border-radius: 35px;
+    padding: 5px;
+    font-family: "WYekan";
+}
+.main_rate {
+		font-family: "WYekan";
+	    /*background-color: #59C5C5;*/
+	    font-size: 31px;
+	    /*width: 20px;*/
+	    height: auto;
+	    text-align: center;
+	    padding: 50px;
+	    display: inline-block;
+	    margin-top: 298px;
+	    margin-right: 570px;
+	    position: absolute;
+	     /*border-radius: 3px; */
+	}
+	.main_result {
+		font-family: "WYekan";
+	    background-color: #59C5C5;
+	    font-size: 61px;
+	    height: auto;
+	    text-align: center;
+	    padding: 37px;
+	    display: inline-block;
+	    margin-top: 400px;
+	    margin-right: 271px;
+	    position: absolute;
+	    /* border-radius: 112px; */
+	}
+    text[x='590'],.highcharts-title{
+        display: none;
+    }
+    .x-chart {
+    	position: absolute;
+    	float: right;
+    	margin-right: 5%;
+    }
+    .chart-left {
+    	float: left;
+    	margin-right: 50%;
+    }
+    text{
+    	font-family: "WYekan";
+    }
+    #title {
+    	font-family: 'WYekan';
+    	position: absolute;
+    	margin-top: -3%;
+    }
+    #result {
+    	font-family: 'WYekan';
+    	position: absolute;
+    	margin-top: 30%;
+    	/*background-color: red;*/
+    	/*display: inline;*/
+    }
+
+    #title .right, #result .right {
+    	float: right;	
+    	margin-right: 268px;
+    }
+
+    #title .left, #result .left {
+    	float: left;	
+    	margin-right: 543px;
+    }
+    .highcharts-title {
+    	font-size: 70px;
+    }
+</style>
+{%endblock%}

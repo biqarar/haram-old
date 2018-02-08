@@ -7,17 +7,20 @@ class model extends main_model {
 				"name",
 				"price",
 				"absence",
+				"absence_type",
 				"certificate",
 				"mark",
 				"min_person",
 				"max_person",
-				// "expired_price",
-				// "payment_count",
+				"meeting_no",
+				"status",
+				"type",
+				"id chart",
 				"id edit")
 		->search_fields("name", "price")
 		->result(function($r){
 			$r->edit = '<a class= "icoedit" href="plan/status=edit/id='. $r->edit . '"></a>';
-			
+			$r->chart = $this->tag("a")->href("report/plan/progress/id=". $r->chart)->class("icoscore")->render();
 		})
 		->search_result(function($result){
 			

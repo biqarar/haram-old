@@ -35,21 +35,21 @@ class view extends main_view{
 		$this->data->report_list = $reprot;
 
 
-		$this->data->dataTable = $this->dtable("report/price/status=reportpricelist/"
-			, array(
-				"id",
-				"plan",
-				_("name") . ' ' . _("teacher"),
-				_("family") . ' ' . _("teacher"),
-				"place",
-				"age_range",
-				"start_time",
-				"end_time",
-				"capacity",
-				"count",
-				"select",
-				"detail"
-				));
+		// $this->data->dataTable = $this->dtable("report/price/status=reportpricelist/"
+		// 	, array(
+		// 		"id",
+		// 		"plan",
+		// 		_("name") . ' ' . _("teacher"),
+		// 		_("family") . ' ' . _("teacher"),
+		// 		"place",
+		// 		"age_range",
+		// 		"start_time",
+		// 		"end_time",
+		// 		"capacity",
+		// 		"count",
+		// 		"select",
+		// 		"detail"
+		// 		));
 		
 	}
 }

@@ -24,13 +24,17 @@
 	<meta NAME="keywords" CONTENT="آستان مقدس، حضرت فاطمه، حضرت فاطمه معصومه، حضرت معصومه، معصومه، پورتال، قرآن و حدیث، کریمه اهل بیت، قم، مرکز قرآن و حدیث، آموزش قرآن، قرآن">
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="static/img/favicon.png">
 
 	{%block head%}
 	
-	<!-- jQuery UI CSS -->
+	<!-- jQuery -->
 	<script type="text/javascript" src="static/js/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="static/js/jquery-3.1.0.min.js"></script> -->
+	
 	<style type="text/css">#perload-blockoff{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: white;z-index: 9999999;padding-top: 10%;overflow: hidden;}#perload-blockoff embed{left: 50%;display: block;position: absolute;padding-top: 10%;top: 0}</style><script type="text/javascript">$('<div id="perload-blockoff"><embed src="static/svg/logo-animation.svg" class="perload-svg" height="150" type="image/svg+xml" /></div>').appendTo($("html"));</script>
+	
+	<!-- jQuery UI CSS -->
 	<link rel="stylesheet" href="static/jquery-ui/jquery-ui.css">
 	<link rel="stylesheet" href="static/Jcrop/css/jquery.Jcrop.min.css" type="text/css" />
 
@@ -38,10 +42,9 @@
 	<link rel="stylesheet" type="text/css" href="{{"static/css/admin.css"|fcache}}">
 	<link type="text/css" rel="stylesheet" href="static/persianDatepicker/css/persianDatepicker-default.css" />
 
-	<!-- jQuery -->
-	<script type="text/javascript" src="static/js/jquery.min.js"></script>
-	<script type="text/javascript" src="static/Jcrop/js/jquery.Jcrop.min.js"></script>
+	
 	<!-- jQuery UI JS -->
+	<script type="text/javascript" src="static/Jcrop/js/jquery.Jcrop.min.js"></script>
 	<script type="text/javascript" src="static/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Custom JS -->
 	<script type="text/javascript" src="static/persianDatepicker/js/persianDatepicker.js"></script>
@@ -97,6 +100,31 @@
 </head>
 
 <body id="portal">
+
+{% if debug %}
+
+	<!-- develop mod -->
+<!-- 		<div style="
+		    background-color: red;
+		    color: black;
+		    font-family: 'WYekan';
+		    font-size: 12px;
+		    position: fixed;
+		    display: block;
+		    height: 25px;
+		    width: 100%;
+		    z-index: 9999998;
+    	">
+			<center>
+				شما در حالت توسعه پورتال مرکز قرآن و حدیث آستان مقدس قم  هستید ... 
+			</center>
+		</div> -->
+
+		
+	<!-- debug mod -->
+
+{%endif%}
+
 	{% block body %}
 	<style type="text/css">
 		.deactive-tab{
@@ -133,6 +161,7 @@
 					<a href="{{link.url}}" 
 					{%if link.url == "logout" %}class="a-undefault"{%endif%}
 					{%if link.url == "login/selectbranch" %}class="a-undefault"{%endif%}
+					{%if link.url == "race/online" %}class="a-undefault"{%endif%}
 					>{{link.name}}</a>
 				</div>
 				{%endfor%}

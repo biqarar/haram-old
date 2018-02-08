@@ -1,0 +1,79 @@
+{# reza mohiti #}
+{% extends layout %}
+{% block content %}
+
+<script type="text/javascript" src="/portal/static/js/highchart/highcharts.js"></script>
+<script type="text/javascript" src="/portal/static/js/highchart/exporting.js"></script>
+<script src="/portal/static/js/bootstrap-checkbox.js" defer></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	show_chart();
+
+});
+function show_chart(type = '')
+{
+	$('#chart').highcharts({
+		chart:{
+			type : type
+		},
+	    title: {text: "نمودار معدل نمرات کلاس های طرح {{plan_detail}}"}, subtitle : {text : "به تفکیک استاد"},xAxis:{
+	    	categories : eval({{chart.categories|raw}})
+	    },
+	    yAxis:{title: {text : "نمره"},
+	    	potLine :[{value:0,width: 1}]},
+	    series: eval({{chart.series|raw}})
+	});
+	$('#absence').highcharts({
+		chart:{
+			type : type
+		},
+	    title: {text: "نمودار بیشترین غیبت فراگیران در طرح {{plan_detail}}"}, subtitle : {text : "به تفکیک فراگیر"},xAxis:{
+	    	categories : eval({{absence.categories|raw}})
+	    },
+	    yAxis:{title: {text : "نمره"},
+	    	potLine :[{value:0,width: 1}]},
+	    series: eval({{absence.series|raw}})
+	});
+}
+
+
+</script>
+<!-- classes detail -->
+<div class="chart-type">
+	<a onclick="show_chart()">نمودار خطی</a>
+	<a onclick="show_chart('column')">نمودار میله ای</a>
+	<a onclick="show_chart('area')">نمودار منطقه ای</a>
+
+	<a href="report/plan/progress/id={{plan_id}}/type=all">نمودار تمامی کلاس ها</a>
+	<a href="report/plan/progress/id={{plan_id}}">نمودار کلاس های فعال</a>
+</div>
+<!-- <dir style="font-family:'WYekan'">نمایش بر خط نتایج مسابقه</dir> -->
+<dir id="title">
+
+	<div id="chart" class="x-chart"></div>
+	<hr>
+	<div id="absence" class="x-chart"></div>
+
+</dir>
+<hr>
+<h2>لیست حذف شده ها از کلاس به دلیل غیبت</h2>
+
+<div class="class-detail">
+	{{ tagMaker.list(list) }}
+</div>
+<style type="text/css">
+	div.chart-type a{
+		cursor: pointer;
+		padding: 5px;
+		border: 1px solid #eee;
+		background-color: #eee;
+	}
+	* {
+		font-family: "WYekan";
+	}
+	g{
+		direction: ltr;
+	}
+</style>
+{%endblock%}

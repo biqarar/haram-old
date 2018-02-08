@@ -15,14 +15,16 @@ class view extends main_view {
 		//------------------------------ list of classes
 		$team_detail = $this->sql(".list", "hefz_teams", function ($query) {
 			$query->joinHefz_ligs()->whereId("#hefz_teams.lig_id")->fieldName("ligname");
-			$query->joinPerson()->whereUsers_id("#hefz_teams.teacher")->fieldFamily("teacherFamily");
+			// $query->joinPerson()->whereUsers_id("#hefz_teams.teacher")->fieldFamily("teacherFamily");
+			$query->joinHefz_group()->whereId("#hefz_teams.hefz_group_id")->fieldName("groupname");
 			$query->whereId($this->xuId());
 		});
-		$team_detail->addColFirst("teacherFamily","teacher");
+		// $team_detail->addColFirst("teacherFamily","teacher");
 		$team_detail->addColFirst("name","name");
+		$team_detail->addColFirst("groupname","groupname");
 		$team_detail->addColFirst("ligname", "ligname");
-		$team_detail->removeCol("id,lig_id,teacher,min_person,max_person");
-		
+		$team_detail->removeCol("id,lig_id,teacher,teacherFamily,hefz_group_id");
+		// var_dump($team_detail);exit();
 		$this->data->list = $team_detail->compile();
 
 

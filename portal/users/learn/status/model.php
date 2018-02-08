@@ -1,10 +1,12 @@
-<?php 
+<?php
 /**
-* 
+*
 */
-class model extends main_model {
+class model extends main_model
+{
 
-	public function post_api(){
+	public function post_api()
+	{
 
 		$usersid = $this->xuId();
 
@@ -20,11 +22,13 @@ class model extends main_model {
 		 ,"date_entry"
 		,"date_delete"
 		,"because"
+		, "id classroom"
 		, "id absence"
 		, "mark mark"
 		, "id certification")
 		->search_fields("plan", "teacher")
-		->query(function($q){
+		->query(function($q)
+		{
 
 			$q->whereUsers_id($this->xuId());
 
@@ -33,39 +37,71 @@ class model extends main_model {
 			$q->joinPlan()->whereId("#classes.plan_id")->fieldName("plan");
 			$q->joinPerson()->whereUsers_id("#classes.teacher")->fieldName("teachername")->fieldFamily("teacherfamily");
 		})
-		->order(function($q, $n, $b){
+		->order(function($q, $n, $b)
+		{
 
-			if($n === 'orderTeachername'){
+			if($n === 'orderTeachername')
+			{
 				$q->join->person->orderName($b);
-			}elseif($n === 'orderPlan'){
+			}
+			elseif($n === 'orderPlan')
+			{
 				$q->join->plan->orderName($b);
-			}elseif($n === 'orderTeacherfamily'){
+			}
+			elseif($n === 'orderTeacherfamily')
+			{
 				$q->join->person->orderName($b);
-			}else{
+			}
+			elseif($n === 'orderDate_entry')
+			{
+				$q->orderDate_entry($b);
+			}
+			elseif($n === 'orderDate_delete')
+			{
+				$q->orderDate_delete($b);
+			}
+			elseif($n === 'orderBecause')
+			{
+				$q->orderBecause($b);
+			}
+			elseif($n === 'orderMark mark')
+			{
+				$q->orderMark($b);
+			}
+			else
+			{
 				$q->orderId("DESC");
 			}
 		})
 		->result(function($r) {
-
+			$classesid = $r->class;
 			$absence_count = $this->find_count_absence($r->absence);
 
 			if (!$absence_count || $absence_count == 0 || $absence_count == null) {
-				$r->absence = $this->tag("a")->href("users/learn/absence/id=" . $this->xuId())->class("icoattendance")->title("نمایش غیبت های فراگیر")->render();
-			}else{
-				$r->absence = $this->tag("a")->href("users/learn/absence/id=" . $this->xuId())->vtext($this->find_count_absence($r->absence))->title("نمایش غیبت های فراگیر")->render();
+				$r->absence = $this->tag("a")->href("users/learn/absence/id=" . $this->xuId(). "/classesid=". $classesid)->class("icoattendance")->title("نمایش غیبت های فراگیر")->render();
+			}
+			else
+			{
+				$r->absence = $this->tag("a")->href("users/learn/absence/id=" . $this->xuId(). "/classesid=". $classesid)->vtext($this->find_count_absence($r->absence))->title("نمایش غیبت های فراگیر")->render();
 			}
 
 			$r->mark = $this->tag("a")->href("users/learn/score/id=". $this->xuId())->vtext($r->mark)->render();
-			
+
 			$r->certification = $this->find_status_certification($r->certification);
 			// var_dump($r);exit();
 			if($r->classesstatus == "اتمام") {
 				$r->class = $this->tag("a")->href("classification/class/classesid=". $r->class)->class("icoredclass")->title("کلاس به اتمام رسیده است " . $r->class)->render();
 
-			}else{
+			}
+			else
+			{
 				$r->class = $this->tag("a")->href("classification/class/classesid=". $r->class)->class("icoclass")->title("کلاس فعال است " . $r->class)->render();
 			}
-			
+
+			$r->classroom = $this->tag("a")
+						->href("users/learn/progress/id=". $this->xuId(). "/classesid=". $classesid)
+						->class("icoscore")->title("نمایش وضعیت نمرات کلاسی ")->render();
+
 		});
 		$this->sql(".dataTable", $dtable);
 	}
@@ -77,24 +113,12 @@ class model extends main_model {
 			return $this->tag("a")
 			->href("users/learn/certification/usersid=" . $this->xuId())
 			->class("icocertification")->render();
-		
+
 		}
 			return $this->tag("a")->class("icocertificationdisable")->disable("disable")->render();
-		
-		// return "icocertificationdisable";
-		// return $certification->num();
-		// if($certification->num() == 1) {
-		// 	foreach ($certification->assoc() as $key => $value) {
-		// 		print_r("key :" . $key . " val : " . $value . "\n");
-		// 		if($value != "") {
-		// 			// return $return;
-		// 		}else{
-		// 			$return =  ($key) . " : " . $value;
-		// 		}
-		// 	}
-		// 	var_dump($return); exit();
-		// }
 	}
+
+
 	public function find_count_absence($classificationid = false) {
 		$absence = $this->sql()->tableAbsence()->whereClassification_id($classificationid)->select()->num();
 		if($absence > 0) {
@@ -115,22 +139,21 @@ class model extends main_model {
 		$sql->joinPlace()->whereId("#classes.place_id")->fieldName("placename");
 		$sql->joinPerson()->whereUsers_id("#classes.teacher")->fieldName("teachername")->fieldFamily("teacherfamily");
 		$x = $sql->select()->allAssoc();
-		
+
 		foreach ($x as $key => $value) {
 
 			$return['sum_all']++;
-			// if(empty($x[$key]['date_delete']) || $x[$key]['date_delete'] == ''){
+
 				$return['sum_active']++;
 
 				$return['classes'][$key]['string'] = $x[$key]['planname'] 		. '  ' .
-								   _($x[$key]["age_range"]) 		. '  ' . 
+								   _($x[$key]["age_range"]) 		. '  ' .
 								   $x[$key]['placename'] 		. ' ساعت ' .
 								   $x[$key]['end_time']			. ' استاد ' .
-								   $x[$key]["teachername"] 		. '  ' . 
+								   $x[$key]["teachername"] 		. '  ' .
 								   $x[$key]['teacherfamily'];
 				$return['classes'][$key]['id'] = $x[$key]["classes_id"];
-				// }
-								   
+
 		}
 		return $return;
 	}

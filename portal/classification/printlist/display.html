@@ -10,7 +10,7 @@
 	{% endif %}
 	<style type="text/css">
 	@media print{
-		#type {
+		#type,#backPortal {
 			display: none;
 		}
 	}
@@ -49,7 +49,9 @@
 	<a href="classification/printlist/classesid={{classesid}}/type=rokhani" class=" botton-link a-undefault">آزمون روخوانی</a>
 	<a href="classification/printlist/classesid={{classesid}}/type=tajvid" class=" botton-link a-undefault">آزمون تجوید</a>
 	<a href="classification/printlist/classesid={{classesid}}/type=cover" class=" botton-link a-undefault">جلد</a>
+	<a href="classification/printlist/classesid={{classesid}}/type=absence" class=" botton-link a-undefault">ثبت غیبت با لیست کلاسی</a>
 	
+	<a href="classification/printlist/classesid={{classesid}}/type=scoreclasses" class=" botton-link a-undefault">ثبت نمرات روزانه کلاس</a>
 	<label class="label-custom" >نمایش پل های ارتباطی
 	<input type="checkbox" value="checked" id="bridge" checked="checked" >
 	<span class="brk-form-custom">
@@ -85,6 +87,8 @@
 		{{ include('classification/printlist/absence.html') }}
 	{% elseif type == 'cover'%}
 		{{ include('classification/printlist/cover.html') }}
+	{% elseif type == 'scoreclasses'%}
+		{{ include('classification/printlist/scoreclasses.html') }}
 	{% else %}
 		{{ include('classification/printlist/defaultList.html') }}
 	{% endif %}

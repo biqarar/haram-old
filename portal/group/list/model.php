@@ -7,7 +7,7 @@ class model extends main_model {
 	public function post_api() {
 
 		$dtable = 	$this->dtable->table("group")
-		->fields("id","name", "id edit")
+		->fields("id","name","id chart", "id edit")
 		->search_fields("name")
 		->query(function($q){
 			// $q->groupbyId();
@@ -15,6 +15,7 @@ class model extends main_model {
 		})
 		->result(function($r){
 			$r->edit = '<a class="icoedit" href="group/status=edit/id='.$r->edit.'" title="'.gettext('edit').' '.$r->edit.'"></a>';
+			$r->chart = $this->tag("a")->href("group/progress/id=". $r->chart)->class("icoletters")->render();
 		});
 		$this->sql(".dataTable", $dtable);
 	}

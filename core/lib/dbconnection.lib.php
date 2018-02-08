@@ -74,7 +74,8 @@ class dbconnection_lib{
 			'9'
 			);
 		$string = preg_replace($patterns, $replacements, $string);
-		// var_dump($string);.
+		// var_dump($string);
+		// var_dump(debug_backtrace());
 		// ilog($string);
 		if(debug_lib::$status || self::$resum_on_error){
 			
@@ -82,6 +83,7 @@ class dbconnection_lib{
 
 			if(self::$first){
 				$this->result = self::$connection->query("SET sql_mode = '' ");
+				$this->result = self::$connection->query("SET @n := 0 ");
 				self::$first = false;
 			}
 			

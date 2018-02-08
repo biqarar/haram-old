@@ -27,7 +27,7 @@ class view extends main_view{
 				"name",
 				"count",
 				"$type",
-				"detail"
+				"بیشتر"
 				));
 	
 	}

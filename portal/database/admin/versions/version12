@@ -1,0 +1,5 @@
+"ALTER TABLE `hefz_race` ADD `presence1` FLOAT NULL AFTER `manfi2`",
+			"ALTER TABLE `hefz_race` ADD `presence2` FLOAT NULL AFTER `presence1`",
+			"ALTER TABLE `hefz_race` CHANGE `manfi1` `manfi1` FLOAT NULL DEFAULT '0';",
+			"ALTER TABLE `hefz_race` CHANGE `manfi2` `manfi2` FLOAT NULL DEFAULT '0';",
+			"ALTER TABLE `price_change` DROP FOREIGN KEY `price_change_ibfk_1`",

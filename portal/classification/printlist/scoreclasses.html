@@ -1,0 +1,426 @@
+	<style type="text/css">
+		.cls1{
+			width:22px;
+		}
+		.cls2{
+			width:116px;
+		}
+		.cls3{
+			width:60px;
+		}
+
+		table{
+			page-break-inside:avoid;
+			page-break-after:auto;
+			border-collapse: collapse;
+		}
+		td{
+			height:23px;
+		}
+		@page {
+			size: A4 Portrait;
+			margin:1.5cm 1cm 1cm 1cm;
+		}
+		.smalltitle{
+			font-size: 8px;
+		}
+		input
+		{
+			width: 70px;
+			text-align: center;
+		}
+		.classes-page{
+			width: 70px;
+		}
+
+	</style>
+	<div class="class-details colory">
+		{% for key, header in detail.header %}
+		<div class="class-detail normal-font smalltitle">
+			<div class="class-detail-title">{{header|lang}}:</div>
+			<div class="class-detail-value"><b>{{detail.list[0][key]|lang}}</b></div>
+		</div>
+		{%endfor%}
+
+
+		<div style="clear:both"></div>
+	</div>
+	<table  cellspacing="0" border="0">
+		<tr>
+			<td rowspan="3" class="cls1 small-font system-default">ردیف</td>
+			<td rowspan="3" class="cls2 system-default small-font">مشخصات</td>
+			<td class="cls3 system-default small-font">ایام هفته</td>
+			<td class="small-font system-default">...شنبه</td>
+			<td class="small-font system-default colory">...شنبه</td>
+			<td class="small-font system-default">...شنبه</td>
+			<td class="small-font system-default colory">...شنبه</td>
+			<td class="small-font system-default">...شنبه</td>
+			<td class="small-font system-default colory">...شنبه</td>
+			<td class="small-font system-default">...شنبه</td>
+			<td class="small-font system-default colory">...شنبه</td>
+			<td class="small-font system-default">...شنبه</td>
+			<td class="small-font system-default colory">...شنبه</td>
+			<td class="small-font system-default">...شنبه</td>
+			<td class="small-font system-default colory">...شنبه</td>
+			<td class="small-font system-default">...شنبه</td>
+		</tr>
+		<tr>
+			<td class="small-font system-default">تاریخ</td>
+			<td class="small-font system-default" >
+				<input type="text" date="date" xclass="mx1">
+			</td>
+			<td class="small-font system-default colory" >
+				<input type="text" date="date" xclass="mx2">
+			</td>
+			<td class="small-font system-default" >
+				<input type="text" date="date" xclass="mx3">
+			</td>
+			<td class="small-font system-default colory" >
+				<input type="text" date="date" xclass="mx4">
+			</td>
+			<td class="small-font system-default" >
+				<input type="text" date="date" xclass="mx5">
+			</td>
+			<td class="small-font system-default colory" >
+				<input type="text" date="date" xclass="mx6">
+			</td>
+			<td class="small-font system-default" >
+				<input type="text" date="date" xclass="mx7">
+			</td>
+			<td class="small-font system-default colory" >
+				<input type="text" date="date" xclass="mx8">
+			</td>
+			<td class="small-font system-default" >
+				<input type="text" date="date" xclass="mx9">
+			</td>
+			<td class="small-font system-default colory" >
+				<input type="text" date="date" xclass="mx10">
+			</td>
+			<td class="small-font system-default" >
+				<input type="text" date="date" xclass="mx11">
+			</td>
+			<td class="small-font system-default colory" >
+				<input type="text" date="date" xclass="mx12">
+			</td>
+			<td class="small-font system-default " >
+				<input type="text" date="date" xclass="mx13">
+			</td>
+
+		</tr>
+		<tr>
+			<td class="small-font system-default">مقطع</td>
+			<td class="small-font system-default">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx1">
+			</td>
+			<td class="small-font system-default colory">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx2">
+			</td>
+			<td class="small-font system-default">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx3">
+			</td>
+			<td class="small-font system-default colory">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx4">
+			</td>
+			<td class="small-font system-default">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx5">
+			</td>
+			<td class="small-font system-default colory">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx6">
+			</td>
+			<td class="small-font system-default">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx7">
+			</td>
+			<td class="small-font system-default colory">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx8">
+			</td>
+			<td class="small-font system-default">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx9">
+			</td>
+			<td class="small-font system-default colory">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx10">
+			</td>
+			<td class="small-font system-default">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx11">
+			</td>
+			<td class="small-font system-default colory">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx12">
+			</td>
+			<td class="small-font system-default ">درس/صفحه:
+				<input type="text" class="classes-page" disabled="disabled" xclass="mx13">
+			</td>
+		</tr>
+	</table>
+	<table  cellspacing="0" border="0">
+	{% for key, list in list %}
+
+		{%for index, scoretype in scoreclasses_list %}
+			<tr class="xtr" index="{{key}}">
+				<td  class="cls1 normal-font">{{key + 1}}</td>
+				<td  class="cls2 normal-font">
+
+				{%if index == 0 %}
+					{{list.name}}  {{list.family}}
+				{%elseif index == 1%}
+					{{list.username}}
+				{%elseif index == 2%}
+					{{list.phone}}
+				{%elseif index == 3%}
+					{{list.mobile}}
+				{%elseif index == 4%}
+					{{list.price}}
+				{%endif%}
+
+				</b></td>
+
+				<td class="cls3 small-font system-default">{{scoretype.title}}</td>
+				<td class="colory">
+					<a xclass="mx1">
+						<input type="text" xclass="mx1" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td>
+					<a xclass="mx2">
+						<input type="text" xclass="mx2" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td class="colory">
+					<a xclass="mx3">
+						<input type="text" xclass="mx3" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td>
+					<a xclass="mx4">
+						<input type="text" xclass="mx4" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td class="colory">
+					<a xclass="mx5">
+						<input type="text" xclass="mx5" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td>
+					<a xclass="mx6">
+						<input type="text" xclass="mx6" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td class="colory">
+					<a xclass="mx7">
+						<input type="text" xclass="mx7" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td>
+					<a xclass="mx8">
+						<input type="text" xclass="mx8" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td class="colory">
+					<a xclass="mx9">
+						<input type="text" xclass="mx9" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td>
+					<a xclass="mx10">
+						<input type="text" xclass="mx10" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td class="colory">
+					<a xclass="mx11">
+						<input type="text" xclass="mx11" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td>
+					<a xclass="mx12">
+						<input type="text" xclass="mx12" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+				<td class="colory">
+					<a xclass="mx13">
+						<input type="text" xclass="mx13" scoretypeid="{{scoretype.id}}" classificationid="{{list.classificationid}}">
+					</a>
+				</td>
+			</tr>
+		{%endfor%}
+	{%endfor%}
+		</table>
+
+<script type="text/javascript">
+
+$('input').keydown(function (e)
+{
+	var col     = $(this).closest('td').index();
+	var col_max = $(this).closest('tr').find('td').size();
+	var row     = $(this).closest('tr').index();
+	switch(e.keyCode)
+	{
+		//arrow left
+		case 37:
+			col += 1;
+			if(col >= col_max)
+			{
+				col = 3;
+				row += 1;
+			}
+			break;
+
+		//arrow up
+		case 38:
+			row -= 1;
+			break;
+
+		// right
+		case 39:
+			col -= 1;
+			if(col <= 2)
+			{
+				col = col_max-1;
+				row -= 1;
+			}
+			break;
+
+		// enter
+		case 13:
+		//arrow down
+		case 40:
+			row += 1;
+			break;
+
+			//esc
+		case 27:
+
+			break;
+	}
+
+	$(this).closest('table').find('tr:eq('+ row +') td:eq('+ col +') input').focus();
+
+});
+
+$(document).ready(function() {
+	$("a input").change(function(){
+		scoretypeid = $(this).attr("scoretypeid");
+		classificationid = $(this).attr("classificationid");
+		val = $(this).val();
+		// value = $(this).value();
+		// console.log($(this),scoretypeid, classificationid,val);
+	});
+	$("body",this).find("input[date=date]").each(function(){
+		var _self = $(this);
+		$(this).persianDatepicker({
+			formatDate:"YYYY-MM-DD",
+			isRTL:false,
+			onSelect: function() {
+				set_attr(_self);
+				set_saved_score($(_self).val(), $(_self).attr("xclass"));
+				// set_saved_score(_self)
+			},
+			onChange: function(){
+			}
+
+		});
+
+	});
+
+	function set_saved_score(date, xclass)
+	{
+		date = convert_date(date);
+		$.ajax({
+			type: "POST",
+			url : 'score/api/get/classroom/classesid={{classesid}}/date='+ date,
+			success : function(data){
+				list = data.msg.list;
+				// console.log(list);
+				for (a in list)
+				{
+
+					if(list[a]['date'] != undefined)
+					{
+
+						if(list[a]['absence'] != 'present')
+						{
+							$(document).find(
+								"input[xclass=\"" + xclass + 
+								"\"][date=\""+date+
+								"\"][classificationid=\""+list[a]['classificationid']+
+								"\"]").css('background-color','#fad2d5');
+						}
+
+						date = list[a]['date'];
+						// console.log(date);
+						date = date.substr(0,4) + '-' + date.substr(6,1) + '-' + date.substr(9,1);
+						date = convert_date(date);
+						$(document).find(
+								"input[xclass=\"" + xclass + 
+								"\"][scoretypeid=\""+list[a]['scoretypeid']+
+								"\"][date=\""+date+
+								"\"][classificationid=\""+list[a]['classificationid']+
+								"\"]").val(list[a]['scorevalue']);
+						$(document).find(
+								"input[xclass=\"" + xclass + 
+								"\"][scoretypeid=\""+list[a]['scoretypeid']+
+								"\"][date=\""+date+
+								"\"][classificationid=\""+list[a]['classificationid']+
+								"\"]").attr('value', list[a]['scorevalue']);
+
+					}
+				}
+			}
+		});
+	}
+
+	function set_attr(_self) {
+		xclass = $(_self).attr("xclass");
+		val = $(_self).val();
+		$("a[xclass="+xclass+"]", $(document)).each(function(){
+			$(this).attr("date", val);
+		});
+		val = convert_date(val)
+		$("input[xclass="+xclass+"]", $(document)).each(function(){
+			$(this).attr("date", val);
+		});
+		// $("input[type=radio,xclass="+xclass+"]").
+	}
+
+	function convert_date(date) {
+		date = date.split("-");
+		var m,d,y;
+		y = date[0];
+		m = date[1];
+		d = date[2];
+		if(y.length == 4) y = y;
+		if(m < 10) {
+			m = "0" + m;
+		}
+		if(d < 10) {
+			d = "0" + d;
+		}
+		return y + "" + m + "" + d;
+	}
+
+	$("a input").change(function(){
+		val  = $(this).val();
+		date = $(this).parent("a").attr("date");
+		date = convert_date(date);
+		scoretypeid = $(this).attr("scoretypeid");
+		classificationid = $(this).attr("classificationid");
+		xurl =
+			"score/api/classificationid="+ classificationid +
+			"/scoretypeid="+scoretypeid+
+			"/value="+val+
+			"/date="+date;
+
+		$.ajax({
+			type: "POST",
+			url : xurl,
+			success : function(data){
+				xhr_result(data);
+			}
+		});
+		console.log($(this), scoretypeid, val,classificationid,date);
+	});
+
+
+
+
+	
+});
+
+</script>

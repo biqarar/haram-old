@@ -13,6 +13,13 @@ class view extends main_view {
 
 		$this->sql(".branch.users", $usersid);
 
+		$this->topLinks(array(
+				array("title" => "آموزش", "url" =>"users/learn/id=$usersid"),
+				array("title" => "مشخصات", "url" =>"users/status=detail/id=$usersid"),
+				array("title" => "شعبه", "url" =>"branch/status=change/usersid=$usersid")
+
+			));
+
 		$this->data->name_family = $this->sql(".userNameFamily", $usersid);
 		$this->data->usersid = $usersid;
 		//------------------------------ make chane password form

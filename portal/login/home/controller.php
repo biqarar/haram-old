@@ -13,7 +13,7 @@ class controller extends main_controller {
 			if($this->login() && !$this->login("select_branch")){
 				$this->access = true;
 			}elseif($this->login() && $this->login("select_branch")){
-				unset($_SESSION['user']['branch']['selected']);
+				unset($_SESSION['my_user']['branch']['selected']);
 				$this->redirect("login");
 			}
 		}
@@ -22,7 +22,7 @@ class controller extends main_controller {
 		$this->listen(array(
 			"max" => 1,
 			"url" => null
-			), 
+			),
 		function() {
 			save(array("login"));
 			if($this->login() && $this->login("select_branch")){
@@ -32,7 +32,7 @@ class controller extends main_controller {
 			}else{
 				$this->access = true;
 			}
-			
+
 		});
 	}
 }

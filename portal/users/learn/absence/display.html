@@ -3,4 +3,15 @@
 {%block content%}
 <p>{{global.users_datail}}</p>
 {{dtable.make(dataTable)}}
+{%if deleted_absence%}
+<p>غیبت های حذف شده این فراگیر در این کلاس</p>
+{{tagMaker.list(deleted_absence)}}
+{%endif%}
+<br>
+<p>
+<i>برای نمایش تمامی غیبت های فراگیر در همه کلاس های شرکت کرده <a href="{{all_absence_link}}" style="color:blue">کلیک کنید</a></i>
+
+</p>
+
+
 {%endblock%}

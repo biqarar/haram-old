@@ -1,0 +1,54 @@
+{# Reza Mohiti rm.biqarar@gmail.com #}
+{% extends layout %}
+{%block content%}
+
+<style type="text/css">
+	.race-delete {
+		/*height: 75px;*/
+		width: 100px;
+		background: #f16971;
+		border-radius: 7px;
+		padding: 25px 50px 25px 50px !important;
+		text-align: center;
+		display: inline-block;
+
+	}
+	.race-vs{
+		width: 100px;
+		background: #9fbe03;
+		border-radius: 7px;
+		padding: 5px 25px !important;
+		text-align: center;
+		display: inline-block;
+	}
+	a {
+		text-decoration: none;
+	}
+
+</style>
+<b>
+	حذف مسابقه
+</b>
+ بین
+<div class="race-vs" raceid="{{global.raceid}}">
+	{{team1}}
+</div>
+و
+<div class="race-vs" raceid="{{global.raceid}}">
+	{{team2}}
+</div>
+
+<br>
+
+<p>
+	تمامی اطلاعات این مسابقه حذف خواهند شد!
+</p>
+<p>
+	اگر اطمینان دارید روی دکمه زیر کلیک کنید.
+</p>
+<a href="">
+	<div class="race-delete" raceid="{{global.raceid}}">
+	حذف مسابقه
+	</div>
+</a>
+{%endblock%}

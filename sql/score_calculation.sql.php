@@ -10,7 +10,7 @@ class score_calculation {
 	public $calculation = array('type'=> 'text@', 'label' => 'calculation');
 	public $status       = array('type'=> 'enum@active,disactive', 'label' => 'status');
 	public $description = array('type'=> 'text@', 'label' => 'description');
-	
+
 
 	public $foreign = array("plan_id" => "plan@id!name");
 
@@ -21,8 +21,8 @@ class score_calculation {
 	public function	plan_id(){
 		$this->form("select")->name("plan_id")->addClass("select-plan-section")->addClass("notselect");
 		$this->setChild(function($q){
-			$list = isset($_SESSION['user']['branch']['selected']) ? 
-						  $_SESSION['user']['branch']['selected'] : array();
+			$list = isset($_SESSION['my_user']['branch']['selected']) ?
+						  $_SESSION['my_user']['branch']['selected'] : array();
 			$q->groupOpen();
 			foreach ($list as $key => $value) {
 				if($key == 0){
@@ -30,11 +30,11 @@ class score_calculation {
 				}else{
 					$q->condition("or","plan.branch_id","=",$value);
 				}
-			}	
+			}
 			$q->groupClose();
 
 		}, function($child, $value){
-			$child->label($value['name'])->value($value['id']); 
+			$child->label($value['name'])->value($value['id']);
 		});
 	}
 

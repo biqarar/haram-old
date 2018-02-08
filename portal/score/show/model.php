@@ -7,24 +7,24 @@ class model extends main_model {
 	* 	whit select score type of plan
 	*/
 	public function sql_field_list($classesid = false) {
-		
+
 		//---------------- check branch
 		$this->sql(".branch.classes", $classesid);
 
 		$calculation = $this->sql()->tableClasses()->whereId($classesid)->fieldId();
 		$calculation->joinPlan()->whereId("#classes.plan_id")->fieldId();
-		$calculation->joinScore_type()->wherePlan_id("#plan.id")->fieldTitle();
+		$calculation->joinScore_type()->wherePlan_id("#plan.id")->andStatus('enable')->fieldTitle();
 		$list = $calculation->select()->allAssoc();
-		
+
 		$field_list = array("username users.username", "pname person.name", "family person.family");
-		
+
 		foreach ($list as $key => $value) {
 			array_push($field_list, "users_id " . $value['title']);
 		}
 
 		array_push($field_list, "users_id score");
 		array_push($field_list, "id certification");
-		
+
 		return $field_list;
 	}
 
@@ -38,16 +38,16 @@ class model extends main_model {
 
 		$list = $this->sql(".scoreCalculation.score_classes",$classesid);
 		// print_r($list);exit();
-	
+
 		$dtable = $this->dtable->table("classification")
 			->fields($this->sql_field_list($classesid))
 			->search_fields("username", "name person.name", "family person.family")
 			->query(function($q){
-				
+
 				$q->andClasses_id($this->xuId("classesid"));
 				$q->joinPerson()->whereUsers_id("#classification.users_id")->fieldName("pname")->fieldFamily("family");
 				$q->joinUsers()->whereId("#classification.users_id")->fieldUsername("username");
-			
+
 			})
 			->search_result(function($result){
 				$vsearch = $_POST['search']['value'];
@@ -82,7 +82,7 @@ class model extends main_model {
 			return $this->tag("a")->href("users/learn/id=". $urser_id)->title("نمایش پرونده تحصیلی فراگیر")->class("icocertificationdisable")->render();
 		}
 	// `$list_certification = $this->sql(".findListCertification.classes", $classification_id);
-		
+
 	}
 
 }

@@ -1,6 +1,6 @@
 <?php
 /**
-* @author reza mohiti rm.biqarar@gmail.com 
+* @author reza mohiti rm.biqarar@gmail.com
 */
 class model extends main_model {
 
@@ -31,7 +31,7 @@ class model extends main_model {
 		//---------------- check branch
 		// $this->sql(".branch.classes", $classes_id);
 
-		$q =  $this->sql()->tableClassification()->whereClasses_id($classes_id);
+		$q =  $this->sql()->tableClassification()->whereClasses_id($classes_id)->fieldId("classificationid")->fieldUsers_id("users_id");
 
 		$q = $this->classification_finde_active_list($q);
 		$q->joinPerson()->whereUsers_id("#classification.users_id")->fieldName()->fieldFamily()->orderFamily();
@@ -59,8 +59,8 @@ class model extends main_model {
 	public function sql_score_type($plan_id = false) {
 		//---------------- check branch
 		// $this->sql(".branch.plan", $plan_id);
-		
-		return $this->sql()->tableScore_type()->wherePlan_id($plan_id)->select()->allAssoc();
+
+		return $this->sql()->tableScore_type()->wherePlan_id($plan_id)->andStatus('enable')->select()->allAssoc();
 	}
 
 

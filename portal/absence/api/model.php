@@ -9,36 +9,10 @@ class model extends main_model {
 	function post_api()	{
 
 		$classification = $this->xuId("classification");
-		
-		$date = $this->xuId("date");
 		$type = $this->xuId("type");
+		$date = $this->xuId("date");
 		
-		$check = $this->sql()->tableAbsence()->whereClassification_id($classification)->andDate($date)->limit(1)->select()->num();
-
-		if($check != 0) {
-			debug_lib::fatal("برای این فراگیر در این تاریخ ثیبت ثبت شده است");
-		}else{
-			//--------------- check if this classification id in the users branch or no.
-			$this->sql(".branch.classification", $classification);
-
-			$x = $this->sql()->tableAbsence()
-						->setClassification_id($classification)
-						->setType($type)
-						->setDate($date)
-						->insert();
-			$this->sql(".absence.autoremove",$classification);
-			$this->type = $type;
-			
-		}
-
-		$this->commit(function(){
-			debug_lib::true(_($this->type) .  " ثبت شد");
-		});
-
-		$this->rollback(function(){
-			debug_lib::fatal("خطا در ثبت اطلاعات");
-		});
-	
+		$result = $this->sql(".absence.insert", $classification, $type, $date);	
 	}
 
 	public function post_delete(){

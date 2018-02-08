@@ -20,7 +20,7 @@ class main_controller{
 		list($access, $msg) = $this->checkPermissions();
 		if(!$access) {
 			if(ifAjax()){
-				page_lib::access($msg);				
+				page_lib::access($msg);
 			}else{
 				$_SESSION['redirect'] = config_lib::$URL;
 				// header("location:".host.'/portal/login');
@@ -158,7 +158,7 @@ class main_controller{
 
 		}else{
 			// check Permission
-			$session_permission = isset($_SESSION['user']['permission']['tables']) ? $_SESSION['user']['permission']['tables'] : false;
+			$session_permission = isset($_SESSION['my_user']['permission']['tables']) ? $_SESSION['my_user']['permission']['tables'] : false;
 			$page_permission = $this->permission;
 			$closeF = false;
 			// var_dump($)

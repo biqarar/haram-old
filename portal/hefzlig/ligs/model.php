@@ -4,12 +4,31 @@
  */
 class model extends main_model {
 
+	public function post_api(){
+		$query = $this->sql()->tableHefz_teams()->whereLig_id($this->xuId());//->select();
+		$query->joinHefz_group()->whereId("#hefz_teams.hefz_group_id")->fieldName("groupname")->fieldId("groupid");
+		$query = $query->select();
+		if($query->num() > 0){
+			debug_lib::msg("teams", $query->allAssoc());
+		}
+	}
+
 	public function post_listapi(){
+		$fields = array('id', 'start_date', 'end_date','name',  "id edit");
+		if($this->xuId("type") == "result"){
+			$fields = array('id', 'start_date', 'end_date','name',"id mrhefz" , "id edit");
+		}
 		$dtable = $this->dtable->table("hefz_ligs")
-		->fields('id', 'start_date', 'end_date','name',  "id edit")
+		->fields($fields)
 		->search_fields("name")
 		->result(function($r) {
-			$r->edit = '<a class="icoedit" href="hefzlig/ligs/status=edit/id='.$r->edit.'" title="'.gettext('edit').' '.$r->edit.'"></a>';
+			if($this->xuId("type") == "result"){
+				$r->mrhefz = $this->tag("a")->href("hefzlig/status=mrhefz/id=".$r->mrhefz)->class("icouser")->title(_("آقای حفظ"))->render();
+				$r->edit =$this->tag("a")->href("hefzlig/status=showresult/id=".$r->edit)->class("icocertification")->title(_("جدول نتایج"))->render();
+			}else{
+				$r->edit =$this->tag("a")->href("hefzlig/ligs/status=edit/id=".$r->edit)->class("icoedit")->title(_("edit"))->render();
+				
+			}
 		});
 		$this->sql(".dataTable", $dtable);
 	}

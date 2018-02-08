@@ -13,9 +13,9 @@ class model extends main_model {
 				'family',
 				'father',
 				'birthday',
-				'gender',
 				'nationalcode',
 				'code',
+				'users_id mobile',
 				// 'marriage',
 				// 'education_id',
 				'users_id detail',
@@ -24,7 +24,13 @@ class model extends main_model {
 			->query(function($q){
 				$q->joinUsers()->whereId("#person.users_id")->fieldUsername("username");
 				$q->joinUsers_branch()->whereUsers_id("#users.id")->andType(($this->xuId("type") == "teacher") ? "teacher" : "operator");
-					//---------- get branch id in the list
+				if($this->xuId("status") == "apiactivelist"){
+					$q->joinClasses()->whereTeacher("#person.users_id")
+						->condition("and", "classes.status", "!=", "'done'");
+					$q->groupbyUsers_id();
+						// var_dump("fuck");exit();
+				}
+				//---------- get branch id in the list
 				$q->groupOpen();
 				foreach ($this->branch() as $key => $value) {
 					if($key == 0){
@@ -34,6 +40,8 @@ class model extends main_model {
 					}
 				}
 				$q->groupClose();
+				
+				// echo $q->select()->string();exit();
 			})
 			->search_result(function($result){
 				$search = array('name', 'family', 'father' , "username users.username" , "nationalcode person.nationalcode");
@@ -68,8 +76,13 @@ class model extends main_model {
 			->result(function($r){
 				$r->learn = $this->tag("a")->addClass("icoallteacher")->href('users/learn/id='. $r->learn)->render();
 				$r->detail = $this->tag("a")->addClass("icomore")->href("users/status=detail/id=". $r->detail)->render();
+				$r->mobile = $this->get_mobile($r->mobile);
 			});
 		$this->sql(".dataTable", $dtable);
 	}	
+
+	public function get_mobile($users_id = false) {
+		return $this->sql()->tableBridge()->whereUsers_id($users_id)->andTitle("mobile")->select()->assoc("value");
+	}
 }
 ?>

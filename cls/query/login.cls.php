@@ -1,6 +1,6 @@
 <?php
 class query_login_cls extends query_cls {
-	
+
 	/**
 	* @param sql object whit select users id
 	*/
@@ -8,10 +8,10 @@ class query_login_cls extends query_cls {
 	public $users_id = false;
 
 	public function config($users_id = false) {
-		
+
 		$this->users_id = $users_id;
 		//------------------------------ set users_id session
-		$_SESSION['user']['id']     = $this->users_id;
+		$_SESSION['my_user']['id']     = $this->users_id;
 
 		return $this->check();
 
@@ -19,53 +19,57 @@ class query_login_cls extends query_cls {
 
 	public function check() {
 
-		// $_SESSION['user']['branch'] = array();
-		$_SESSION['user']['branch']['all'] = array();
-		$_SESSION['user']['branch']['active'] = array();
-		
+		// $_SESSION['my_user']['branch'] = array();
+		$_SESSION['my_user']['branch']['all'] = array();
+		$_SESSION['my_user']['branch']['active'] = array();
+
 		$users_branch =	$this->users_branch();
 		// var_dump($users_branch);exit();
 
 		foreach ($users_branch as $index => $value) {
 			//------------------------------ set branch_id  session (all branch for this user)
-			$_SESSION['user']['branch']['all'][$index] = $value;
+			$_SESSION['my_user']['branch']['all'][$index] = $value;
 
 			if($value['status'] == "enable") {
 
-				$_SESSION['user']['branch']['active'][$index] = $value['branch_id'];
-							
+				$_SESSION['my_user']['branch']['active'][$index] = $value['branch_id'];
+
 			}
 
 		}
-		
+
 		if(
 			(
-				isset($_SESSION['user']['branch']['active']) &&
-				count($_SESSION['user']['branch']['active']) > 1
+				isset($_SESSION['my_user']['branch']['active']) &&
+				count($_SESSION['my_user']['branch']['active']) > 1
 			)
 			 &&
 			(
-				!isset($_SESSION['user']['branch']['selected']) || 
-				 empty($_SESSION['user']['branch']['selected'])
+				!isset($_SESSION['my_user']['branch']['selected']) ||
+				 empty($_SESSION['my_user']['branch']['selected'])
 			)
 
 		  ) {
-		
+
 			header("location:".host."/login/selectbranch");
 
 			return false;
-		
+
 		}else{
 
-			if(    !isset($_SESSION['user']['branch']['selected'])) {
+			if(    !isset($_SESSION['my_user']['branch']['selected'])) {
 
-				          $_SESSION['user']['branch']['selected'][0] =  
+				if (isset($_SESSION['my_user']['branch']['active'][0])) {
 
-					isset($_SESSION['user']['branch']['active'][0]) ? 
+				          $_SESSION['my_user']['branch']['selected'][0] =
+						  $_SESSION['my_user']['branch']['active'][0] ;
+				}else{
 
-						  $_SESSION['user']['branch']['active'][0] : 
-					
-					page_lib::access("no branch active");	
+					unset($_SESSION['my_user']);
+					page_lib::access("no branch active!");
+
+				}
+
 			}
 
 			$this->set_session();
@@ -86,32 +90,32 @@ class query_login_cls extends query_cls {
 	public function set_session( ){
 
 		$users_branch_data = $this->sql()->tableUsers_branch()->whereUsers_id($this->users_id)
-		->andBranch_id($_SESSION['user']['branch']['selected'][0])->limit(1)->select()->assoc();
+		->andBranch_id($_SESSION['my_user']['branch']['selected'][0])->limit(1)->select()->assoc();
 
-		
+
 		//------------------------------ set status session
-		$_SESSION['user']['type'] = $users_branch_data['type'];
-		
+		$_SESSION['my_user']['type'] = $users_branch_data['type'];
+
 		//------------------------------ set status session
-		$_SESSION['user']['status'] = $users_branch_data['status'];
+		$_SESSION['my_user']['status'] = $users_branch_data['status'];
 
 
 		$users_data = $this->sql()->tableUsers()->whereId($this->users_id)->limit(1)->select()->assoc();
 
 		//------------------------------ set email session
-		$_SESSION['user']['email'] = $users_data['email'];
-		
+		$_SESSION['my_user']['email'] = $users_data['email'];
+
 
 		$sql_person = $this->sql()->tablePerson()->whereUsers_id($this->users_id)->limit(1)->select()->assoc();
-		
+
 		//------------------------------ set name session
-		$_SESSION['user']['name']   = $sql_person['name'];
+		$_SESSION['my_user']['name']   = $sql_person['name'];
 
 		//------------------------------ set family session
-		$_SESSION['user']['family'] = $sql_person['family'];
-		
+		$_SESSION['my_user']['family'] = $sql_person['family'];
+
 		//------------------------------ set gender session
-		$_SESSION['user']['gender'] = $sql_person['gender'];
+		$_SESSION['my_user']['gender'] = $sql_person['gender'];
 
 
 		$this->permission();
@@ -122,10 +126,10 @@ class query_login_cls extends query_cls {
 		// return ;
 		$permission = $this->sql()->tablePermission();
 		$permission->joinUsers_branch()->whereId("#permission.users_branch_id");
-			foreach ($_SESSION['user']['branch']['selected'] as $key => $value) {
+			foreach ($_SESSION['my_user']['branch']['selected'] as $key => $value) {
 				$permission->condition("and" ,"users_branch.branch_id", "=", $value);
 			}
-		$permission->condition("and", "users_branch.users_id", "=", $_SESSION['user']['id']);
+		$permission->condition("and", "users_branch.users_id", "=", $_SESSION['my_user']['id']);
 		$permission = $permission->select()->allAssoc();
 
 
@@ -138,34 +142,34 @@ class query_login_cls extends query_cls {
 			if($value['insert'] != NULL ) $session['tables'][$value["tables"]]['insert'] = $value['insert'];
 			if($value['delete'] != NULL ) $session['tables'][$value["tables"]]['delete'] = $value['delete'];
 			if($value['condition'] != NULL) {
-				
+
 				if(preg_match("/\,/", $value['condition'])){
 					$s = preg_split("/\,/", $value['condition']);
 					foreach ($s as $cKey => $cValue) {
 						$session['tables'][$value["tables"]]['condition'][$cValue] = true;
 					}
-					
+
 				}else{
 					$session['tables'][$value["tables"]]['condition'] = $value['condition'];
-				}			
-				
+				}
+
 
 				// ----------------------- set supervisor session
 				if($value['tables'] == "branch" AND $value['condition'] == "*") {
-					
-					$_SESSION['supervisor'] = $_SESSION['user']['id'];
-					
-					$_SESSION['user']['branch']['active'] = array();
-					
+
+					$_SESSION['supervisor'] = $_SESSION['my_user']['id'];
+
+					$_SESSION['my_user']['branch']['active'] = array();
+
 					foreach ($this->sql(".branch._list") as $key => $value) {
-						$_SESSION['user']['branch']['active'][] = $value; 
+						$_SESSION['my_user']['branch']['active'][] = $value;
 					}
 
 				}
 			}
 		}
-		unset($_SESSION['user']['permission']);
-		$_SESSION['user']['permission'] = $session;
+		unset($_SESSION['my_user']['permission']);
+		$_SESSION['my_user']['permission'] = $session;
 		// echo "<pre>";
 		// print_r($_SESSION);exit();
 	}

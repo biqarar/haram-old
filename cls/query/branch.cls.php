@@ -1,8 +1,8 @@
-<?php 
+<?php
 class query_branch_cls extends query_cls {
 
 	public function __construct() {
-		if(!isset($_SESSION['user']['id'])){
+		if(!isset($_SESSION['my_user']['id'])){
 			header("location:" . host . "/login");
 			exit();
 		}
@@ -22,16 +22,16 @@ class query_branch_cls extends query_cls {
 				$listBranch->orId($value);
 			}
 		}
-		
+
 		$listBranch = $listBranch->fieldName("branch_name")->fieldId("branch_id");
 		return  $listBranch->select()->allAssoc();
-		
+
 	}
 
 
 	public function get_users_branch() {
 
-		$listBranch = $this->sql()->tableUsers_branch()->whereUsers_id($_SESSION['user']['id'])
+		$listBranch = $this->sql()->tableUsers_branch()->whereUsers_id($_SESSION['my_user']['id'])
 		->andStatus("enable");
 		$listBranch->groupOpen();
 		$first = true;
@@ -46,21 +46,21 @@ class query_branch_cls extends query_cls {
 		}
 		$listBranch->groupClose();
 		$listBranch->joinBranch()->whereId("#users_branch.branch_id")->fieldName();
-		
+
 		return  $listBranch->select()->allAssoc();
 	}
 
-	
-	
+
+
 	public function check($arg = false, $type = false) {
 
 		//--------------- $arg = branch_id
-		if($arg){	
+		if($arg){
 			foreach ($this->_list() as $key => $value) {
-				
+
 				if($value == $arg) {
 					//---------- the branch founded in branch list
-					//---------- return branch id 
+					//---------- return branch id
 					return $value;
 				}
 			}
@@ -77,22 +77,22 @@ class query_branch_cls extends query_cls {
 	}
 
 	public function _list($selectOrActive = "selected"){
-		
+
 		if(global_cls::supervisor()) {
-		
+
 			return $this->allBranch("id");
-		
+
 		}
 
 		if($selectOrActive == "active"){
-			return isset($_SESSION['user']['branch']['active']) ?  
-						 $_SESSION['user']['branch']['active'] :
-						 $_SESSION['user']['branch']['selected'];	
+			return isset($_SESSION['my_user']['branch']['active']) ?
+						 $_SESSION['my_user']['branch']['active'] :
+						 $_SESSION['my_user']['branch']['selected'];
 		}
 
-		return isset($_SESSION['user']['branch']['selected']) ?  
-					 $_SESSION['user']['branch']['selected'] :
-					 $_SESSION['user']['branch']['active'];
+		return isset($_SESSION['my_user']['branch']['selected']) ?
+					 $_SESSION['my_user']['branch']['selected'] :
+					 $_SESSION['my_user']['branch']['active'];
 	}
 
 	public function post_branch() {
@@ -112,7 +112,7 @@ class query_branch_cls extends query_cls {
 	}
 
 	public function usersbranch($users_branch_id = false){
-		
+
 		$us = $this->sql()->tableUsers_branch()->whereId($users_branch_id)->limit(1)->select()->assoc();
 		$users_id = $us['users_id'];
 		$branch_id = $us['branch_id'];
@@ -129,7 +129,7 @@ class query_branch_cls extends query_cls {
 	* classification JOIN classes JOIN plan and select brach id
 	*/
 	public function classification($classification_id = false) {
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tableClassification()->whereId($classification_id)->limit(1)->select()->assoc("classes_id");
 
 		return $this->classes($query);
@@ -140,9 +140,9 @@ class query_branch_cls extends query_cls {
 	* classes  JOIN plan and select brach id
 	*/
 	public function classes($classes_id = false) {
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tableClasses()->whereId($classes_id)->limit(1)->select()->assoc("plan_id");
-		
+
 		return $this->plan($query);
 	}
 
@@ -150,7 +150,7 @@ class query_branch_cls extends query_cls {
 	* absence  JOIN classification JOIN classes JOIN plan and select brach id
 	*/
 	public function absence($absence_id = false) {
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tableAbsence()->whereId($absence_id)->limit(1)->fieldClassification_id();
 
 		return $this->classification($query->select()->assoc("classification_id"));
@@ -160,7 +160,7 @@ class query_branch_cls extends query_cls {
 	* users  JOIN userbranch and select brach id
 	*/
 	public function users($users_id = false, $branch_id = false) {
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tableUsers_branch()->whereUsers_id($users_id)->select()->allAssoc();
 		$in_branch = false;
 		if($branch_id) {
@@ -196,7 +196,7 @@ class query_branch_cls extends query_cls {
 	}
 
 	public function plan ($plan_id = false) {
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tablePlan()->whereId($plan_id)->limit(1)->select()->assoc("branch_id");
 
 		return $this->check($query);
@@ -221,14 +221,14 @@ class query_branch_cls extends query_cls {
 	}
 
 	public function group ($group_id = false) {
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tableGroup()->whereId($group_id)->limit(1)->select()->assoc("branch_id");
 
 		return $this->check($query);
 	}
 
 	public function place ($place_id = false) {
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tablePlace()->whereId($place_id)->limit(1)->select()->assoc("branch_id");
 
 		return $this->check($query);
@@ -237,7 +237,7 @@ class query_branch_cls extends query_cls {
 	public function price_change($price_change_id = false) {
 		$query = $this->sql()->tablePrice_change()->whereId($price_change_id)->limit(1)->select()->assoc("branch_id");
 
-		return $this->check($query);	
+		return $this->check($query);
 	}
 
 	public function price($price_id = false) {
@@ -249,7 +249,7 @@ class query_branch_cls extends query_cls {
 
 	public function course($course_id = false) {
 
-		//--------------- 
+		//---------------
 		$query = $this->sql()->tableCourse()->whereId($course_id)->limit(1)->select()->assoc("branch_id");
 
 		return $this->check($query);
@@ -274,8 +274,8 @@ class query_branch_cls extends query_cls {
 		$query = $this->sql()->tableHefz_teamuser()->whereId($hefz_teamuser_id)->limit(1)->select()->assoc("hefz_team_id");
 		return $this->hefz_teams($query);
 	}
-	
-	
+
+
 
 	public function allBranch($field = false) {
 		return $this->sql()->tableBranch()->select()->allAssoc($field);

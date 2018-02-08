@@ -1,0 +1,24 @@
+{# Reza Mohiti rm.biqarar@gmail.com #}
+{% extends layout %}
+{%block content%}
+
+{%for i, link in result%}
+<center>
+
+	<h3>
+	نتایج مسابقات در گروه
+	<a style="color:#0C706F">{{link['groupname']}}</a>
+	</h3>
+</center>
+{{tagMaker.list(link['result'])}}
+<hr>
+{%endfor%}
+<script type="text/javascript">
+
+$( function()
+{
+	$( ".table-list tr" ).sortable();
+	$( ".table-list tr" ).disableSelection();
+});
+</script>
+{%endblock%}

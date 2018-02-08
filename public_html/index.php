@@ -70,6 +70,9 @@ $domain = $locale;
 bindtextdomain($domain, root_dir.'languages/');
 bind_textdomain_codeset($domain, 'UTF-8');
 textdomain($domain);
+
+session_set_cookie_params(3600);
+
 session_start();
 //load auto load
 require_once(core."autoload.php");

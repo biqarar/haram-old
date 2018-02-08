@@ -16,7 +16,8 @@ class view extends main_view  {
 
 		$this->topLinks(array(
 			array("title" => "آموزش", "url" =>"users/learn/id=$users_id"),
-			array("title" => "مشخصات", "url" =>"users/status=detail/id=$users_id")
+			array("title" => "مشخصات", "url" =>"users/status=detail/id=$users_id"),
+				array("title" => "شعبه", "url" =>"branch/status=change/usersid=$users_id")
 
 		));
 		//------------------------------ check users (if teacher , can not be display another users by id)

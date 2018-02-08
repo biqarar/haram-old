@@ -6,11 +6,32 @@
 class model extends main_model {
 	public function sql_classes($start_date = false, $end_date = false) {
 	
+	// $query = 
+	// "
+	// 	SELECT 
+	// 		plan.name AS planname,
+	// 		COUNT(classes.id) AS classescount,
+	// 		COUNT(classification.id) AS classificationcount
+	// 	FROM
+	// 		classes
+	// 	INNER JOIN classification ON classification.classes_id = classes.id
+	// 	INNER JOIN plan ON plan.id = classes.plan_id
+	// 	WHERE
+	// 		classes.start_date >= '$start_date' AND classes.end_date <= '$end_date'
+	// 	GROUP BY planname
+	// ";
 
+	// $result = $this->db($query)->allAssoc();
+	// var_dump($result);
+	// exit();
 	$classes = $this->sql()->tableClasses()
 			->condition("where", "#start_date" , "<=", $this->sql(".duplicateUsersClasses.convert_date",$end_date))
 			->condition("and", "#end_date", ">=", $this->sql(".duplicateUsersClasses.convert_date",$start_date));
-	$classes->joinPlan()->whereId("#classes.plan_id")->fieldName('planname')->fieldMax_person("maxp");
+	$classes->joinPlan()
+		->whereId("#classes.plan_id")
+		->fieldName('planname')
+		->fieldMax_person("maxp")
+		->fieldPrice("price");
 	$classes->groupOpen();
 	//---------- get branch id in the list
 	foreach ($this->branch() as $key => $value) {
@@ -23,6 +44,7 @@ class model extends main_model {
 	$classes->groupClose();
 	$classes->joinGroup()->whereId("#plan.group_id")->fieldName("group_name");
 	$classes = $classes->select()->allAssoc();
+	
 		// var_dump($classes->string());exit();
 		$return = array();
 		// $return = array("طرح","تعداد کلاس های تشکیل شده","تعداد نفرات شرکت کننده","میانگین هر کلاس");
@@ -40,7 +62,8 @@ class model extends main_model {
 			  $return[$value['plan_id']]['classificationcount'] = intval($value['count']);
 
 		// $return[$value['plan_id']]['max_person'] = $value['maxp'];
-		$return[$value['plan_id']]['average_classes'] = intval($return[$value['plan_id']]['classificationcount']) /  intval( $return[$value['plan_id']]['classescount']);
+		$return[$value['plan_id']]['average_classes'] = round(intval($return[$value['plan_id']]['classificationcount']) /  intval( $return[$value['plan_id']]['classescount']));
+		$return[$value['plan_id']]['price'] = $value['price'];
 	}
 	// var_dump($return);exit();
 		return $return;

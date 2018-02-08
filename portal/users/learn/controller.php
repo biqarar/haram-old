@@ -5,6 +5,13 @@
 class controller extends main_controller{
 	
 	function config(){
+		$this->listen(array(
+			"max" => 5,
+			"url" => array("progress", "id" => "/^\d+$/", "classesid" => "/^\d+$/")
+			), function() {
+			save(array("users", "learn", "progress" ));
+			$this->permission = array("person" => array("select" => array("public")));
+		});
 
 		$this->listen(array(
 			"max" => 3,
@@ -72,16 +79,16 @@ class controller extends main_controller{
 		});
 
 		$this->listen(array(
-			"max" => 2,
-			"url" => array("absence", "id" => "/^\d+$/")
+			"max" => 3,
+			"url" => array("absence", "id" => "/^\d+$/", "classesid" => "/^\d+$/")
 			), function() {
 			save(array("users", "learn", "absence"));
 			$this->permission = array("person" => array("select" => array("public")));
 		});
 
 		$this->listen(array(
-			"max" => 5,
-			"url" => array( "listabsence", "status" => "xapi", "usersid" => "/^\d+$/")
+			"max" => 6,
+			"url" => array( "listabsence", "status" => "xapi", "usersid" => "/^\d+$/", "classesid" => "/^\d+$/")
 			), function() {
 			save(array("users", "learn", "absence" , "mod" => "api"));
 			$this->permission = array("person" => array("select" => array("public")));

@@ -1,6 +1,6 @@
-<?php 
+<?php
 /**
-* 
+*
 */
 class checkPermission_cls {
 	public $sql = false;
@@ -15,7 +15,7 @@ class checkPermission_cls {
 		// var_dump($x);
 		// exit();
 		// exit(page_lib::access("s"));
-		// $users_id = ($this->login()) ? $_SESSION['user']['id'] : page_lib::access("users_id");
+		// $users_id = ($this->login()) ? $_SESSION['my_user']['id'] : page_lib::access("users_id");
 
 	}
 

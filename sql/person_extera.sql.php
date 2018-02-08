@@ -3,30 +3,30 @@ namespace sql;
 class person_extera {
 
   public $id             = array("type" => "int@10");
-  public $users_id       = array("type" => "int@10", "label" => "extera_users_id"); 
+  public $users_id       = array("type" => "int@10", "label" => "users_id"); 
   public $place_birth     = array("type" => "int@10", "label" => "place_birth"); 
-  public $child_daughter = array("type" => "int@2", "label" => "extera_child_daughter"); 
-  public $child_son      = array("type" => "int@2", "label" => "extera_child_son"); 
-  public $dependents     = array("type" => "int@2", "label" => "extera_dependents"); 
-  public $soldiering     = array("type" => "enum@done,exempt", "label" => "extera_soldiering"); 
-  public $exemption_type = array("type" => "enum@education,dependents,temp,medical,continual", "label" => "extera_exemption_type"); 
-  public $job            = array("type" => "varchar@255", "label" => "extera_job"); 
-  public $residence      = array("type" => "enum@private_home,rent,some_else", "label" => "extera_residence"); 
-  public $health         = array("type" => "enum@healthy,maim", "label" => "extera_health"); 
-  public $treated        = array("type" => "enum@yes,no", "label" => "extera_treated"); 
-  public $stature        = array("type" => "float@", "label" => "extera_stature"); 
-  public $weight         = array("type" => "int@3", "label" => "extera_weight"); 
-  public $blood_group    = array("type" => "enum@A+,A-,B+,B-,AB+,AB-,O+,O-", "label" => "extera_blood_group"); 
-  public $disease        = array("type" => "varchar@255", "label" => "extera_disease"); 
-  public $insurance_type = array("type" => "varchar@255", "label" => "extera_insurance_type"); 
-  public $insurance_code = array("type" => "varchar@20", "label" => "extera_insurance_code"); 
-  public $good_remember  = array("type" => "varchar@255", "label" => "extera_good_remember"); 
-  public $bad_remember   = array("type" => "varchar@255", "label" => "extera_bad_remember"); 
-  public $tahqiq         = array("type" => "float@", "label" => "extera_tahqiq"); 
-  public $tartil         = array("type" => "float@", "label" => "extera_tartil"); 
-  public $tajvid         = array("type" => "float@", "label" => "extera_tajvid"); 
-  public $melli_account  = array("type" => "varchar@13", "label" => "extera_melli_account"); 
-  public $melat_account  = array("type" => "varchar@10", "label" => "extera_melat_account"); 
+  public $child_daughter = array("type" => "int@2", "label" => "child_daughter"); 
+  public $child_son      = array("type" => "int@2", "label" => "child_son"); 
+  public $dependents     = array("type" => "int@2", "label" => "dependents"); 
+  public $soldiering     = array("type" => "enum@done,exempt", "label" => "soldiering"); 
+  public $exemption_type = array("type" => "enum@education,dependents,temp,medical,continual", "label" => "exemption_type"); 
+  public $job            = array("type" => "varchar@255", "label" => "job"); 
+  public $residence      = array("type" => "enum@private_home,rent,some_else", "label" => "residence"); 
+  public $health         = array("type" => "enum@healthy,maim", "label" => "health"); 
+  public $treated        = array("type" => "enum@yes,no", "label" => "treated"); 
+  public $stature        = array("type" => "float@", "label" => "stature"); 
+  public $weight         = array("type" => "int@3", "label" => "weight"); 
+  public $blood_group    = array("type" => "enum@A+,A-,B+,B-,AB+,AB-,O+,O-", "label" => "blood_group"); 
+  public $disease        = array("type" => "varchar@255", "label" => "disease"); 
+  public $insurance_type = array("type" => "varchar@255", "label" => "insurance_type"); 
+  public $insurance_code = array("type" => "varchar@20", "label" => "insurance_code"); 
+  public $good_remember  = array("type" => "varchar@255", "label" => "good_remember"); 
+  public $bad_remember   = array("type" => "varchar@255", "label" => "bad_remember"); 
+  public $tahqiq         = array("type" => "float@", "label" => "tahqiq"); 
+  public $tartil         = array("type" => "float@", "label" => "tartil"); 
+  public $tajvid         = array("type" => "float@", "label" => "tajvid"); 
+  public $melli_account  = array("type" => "varchar@13", "label" => "melli_account"); 
+  public $melat_account  = array("type" => "varchar@10", "label" => "melat_account"); 
   
 
 

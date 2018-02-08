@@ -1,0 +1,70 @@
+{# reza mohiti #}
+{% extends layout %}
+{% block content %}
+
+<script type="text/javascript" src="/portal/static/js/highchart/highcharts.js"></script>
+<script type="text/javascript" src="/portal/static/js/highchart/exporting.js"></script>
+<script src="/portal/static/js/bootstrap-checkbox.js" defer></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	show_chart("column");
+	
+});
+function show_chart(type = '')
+{
+	$('#chart').highcharts({
+		chart:{
+			type : type
+		},
+	    title: {text: "نمودار معدل نمرات کلاس های گروه علمی {{plan_detail}}"}, subtitle : {text : "به تفکیک استاد"},xAxis:{
+	    	categories : ''
+	    },
+	    yAxis:{title: {text : "نمره"},
+	    	potLine :[{value:0,width: 1}]},
+	    series: {{chart.series|raw}}
+	});
+
+	$('#count').highcharts({
+		chart:{
+			type : type
+		},
+	    title: {text: "نمودار تعداد فراگیران گروه علمی {{plan_detail}}"}, subtitle : {text : "به تفکیک استاد"},xAxis:{
+	    	categories : ''
+	    },
+	    yAxis:{title: {text : "تعداد"},
+	    	potLine :[{value:0,width: 1}]},
+	    series: {{count_class.series|raw}}
+	});		
+}
+
+	
+</script>
+<!-- classes detail -->
+<div class="class-detail">
+	{{ tagMaker.list(list) }}
+</div>
+
+<!-- <dir style="font-family:'WYekan'">نمایش بر خط نتایج مسابقه</dir> -->
+<dir id="title">
+
+	<div id="chart" class="x-chart"></div>
+	<hr>
+	<div id="count" class="x-chart"></div>
+	
+</dir>
+<style type="text/css">
+	div.chart-type a{
+		cursor: pointer;
+		padding: 5px;
+		border: 1px solid #eee;
+		background-color: #eee;
+	}
+	* {
+		font-family: "WYekan";
+	}
+	g{
+		direction: ltr;
+	}
+</style>
+{%endblock%}

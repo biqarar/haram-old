@@ -1,0 +1,11 @@
+{# reza mohiti rm.biqarar@gmail.com #}
+{% extends layout %}
+{% block content %}
+<h3>تاریخچه</h3>
+{{tagMaker.list(history.history)}}
+<h3>به روز رسانی</h3>
+{{tagMaker.list(history.update)}}
+<h3>حذف</h3>
+{{tagMaker.list(history.trash)}}
+
+{%endblock%}

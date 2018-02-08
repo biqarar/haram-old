@@ -4,7 +4,7 @@ class query_plan_cls extends query_cls
 	public function maxPerson($classesid = false){
 
 		//------------------ check branch
-		$this->sql(".branch.classes", $classesid);
+		// $this->sql(".branch.classes", $classesid);
 
 		$plan_max = $this->sql()->tableClasses()->whereId($classesid)->fieldId();
 		$plan_max->joinPlan()->whereId("#classes.plan_id")->fieldMax_person();

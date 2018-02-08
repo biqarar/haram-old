@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @author reza mohitit rm.biqarar@gmail.com
  */
@@ -14,29 +14,32 @@ class model extends main_model{
 	public $title = "";
 	public $version;
 
-	public function xecho($str = false) {echo "<pre><br>" . $str . "</pre>";}
-	
-	public function ready($version = "new version") {
+	public function xecho($str = false)
+	{echo "<pre><br>" . $str . "</pre>";}
+
+	public function ready($version = "new version")
+	{
 
 		$this->xecho("In The Name Of Allah");
-
-		if(!isset($_GET['password']) || $_GET['password'] != 'ali110ali110') {
+// var_dump($_SESSION);
+		if(!isset($_GET['password']) || $_GET['password'] != 'ali110ali110' || !isset($_SESSION['supervisor']))
+		{
 			$this->xecho("password incorect.");
 			exit(); die();
 		}else{
 
 			$this->xecho("Password OK , U R supervisor :)");
-		
+
 			set_time_limit(30000);
 			ini_set('memory_limit', '-1');
 			ini_set("max_execution_time", "-1");
-		
+
 			if (ob_get_level() == 0) ob_start();
 
 			$this->xecho( "Set time start as : " . time());
 
 			$this->xecho( "Set version $version in mysql ");
-			
+
 			$this->xecho( "Starting ... ");
 
 			$this->start_time = time();
@@ -44,29 +47,33 @@ class model extends main_model{
 		}
 	}
 
-	public function count() {
+	public function count()
+	{
 		$sql = new dbconnection_lib;
 		$sql::$resum_on_error = true;
 		$sql->query("COMMIT");
 		$this->i++;
 	}
 
-	public function title($title) {
+	public function title($title)
+	{
 		$this->xecho(" -------------------------------------------- $title ... ");
 		$this->title = $title;
 	}
 
-	public function set_version_history($version = 0 , $query = false) {
+	public function set_version_history($version = 0 , $query = false)
+	{
 		$sql = new dbconnection_lib;
 		$sql::$resum_on_error = true;
-		$s = $sql->query("INSERT INTO 
-			`quran_hadith_log`.`database_version` 
-			(`id`, `version`, `query`, `time`) 
+		$s = $sql->query("INSERT INTO
+			`quran_hadith_log`.`database_version`
+			(`id`, `version`, `query`, `time`)
 			VALUES (NULL, '$version', '$query', CURRENT_TIMESTAMP)");
 		$this->xecho( "Saved in History (table database_version)");
 	}
 
-	public function flush() {
+	public function flush()
+	{
 		$this->set_version_history($this->version, $this->title . " ( " . $this->i . " record)");
 		$this->xecho( "num = " . $this->i );
 		$this->xecho(" -------------------------------------------- ");
@@ -75,73 +82,78 @@ class model extends main_model{
 		flush();
 	}
 
-	public function end() {
+	public function end()
+	{
 		$this->xecho( " --------------------------------------------  End :)   ");
 		$this->end_time = time();
 		$this->xecho(" End time : " . $this->end_time);
 		$this->all_tiem = intval($this->end_time) - intval($this->start_time);
 
-        $this->xecho( "<div style='background :green'><br><br> all perosses ended 
+        $this->xecho( "<div style='background :green'><br><br> all perosses ended
         	in :" . $this->all_tiem   .  "   sec <br><br><br></div></pre>");
 		ob_end_flush();
 		exit(); die();
 	}
 
-	public function sql_admin() {
+	public function sql_admin()
+	{
 		//---------------------------------------------------------------------------------------------------
-		$this->ready(12);
+		$this->ready(17);
 
-		//----------------------------- new version function (database change)	
-		$this->database_change();		
-		
+		//----------------------------- new version function (database change)
+		$this->database_change();
+
 		//----------------------------- new version function (query on record)
 		$this->query_on_record();
-		
+
 		//---------------------------------------------------------------------------------------------------
 		$this->end();
 
 	}
 
-	public function query_on_record() {
+	public function query_on_record()
+	{
 		// ---------------------------------------------------------------------------------------------------
+
 
 	}
 
-	public function database_change() {
+	public function database_change()
+	{
 		/**
 		* database change
 		* CREATE DATABASE `quran_hadith` DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 		* ALTER TABLE `quran_hadith`.`oldprice` RENAME `quran_hadith_old`.`oldprice`
 		*/
-				
+
 		$sql = new dbconnection_lib;
 
 
 		$database_change = array(
-			//
-			"ALTER TABLE `hefz_race` ADD `presence1` FLOAT NULL AFTER `manfi2`",
-			"ALTER TABLE `hefz_race` ADD `presence2` FLOAT NULL AFTER `presence1`",
-			"ALTER TABLE `hefz_race` CHANGE `manfi1` `manfi1` FLOAT NULL DEFAULT '0';",
-			"ALTER TABLE `hefz_race` CHANGE `manfi2` `manfi2` FLOAT NULL DEFAULT '0';",
-			"ALTER TABLE `price_change` DROP FOREIGN KEY `price_change_ibfk_1`",
+			//--------------------
+			// "ALTER TABLE `score_type` ADD `status` ENUM('enable','disable') NOT NULL DEFAULT 'enable' AFTER `description`;",
+
 		);
 
 
 		$this->run($database_change);
 	}
 
-	public function run($array =false) {
-		
+	public function run($array =false)
+	{
+
 		$sql = new dbconnection_lib;
 
 		$error = 0;
 		$all = 0;
 
-		foreach ($array as $key => $value) {
+		foreach ($array as $key => $value)
+		{
 			$this->title($value);
 			$s = $sql->query($value);
 			$this->xecho( "<b>Result:</b>". $sql->result . "\n");
-			if(!$sql->result){
+			if(!$sql->result)
+			{
 				$this->xecho( "<div style='background :red'> -- Error-- ");
 				$this->xecho( "<b>Error number:</b>". $sql::$connection->errno  . "\n");
 				$this->xecho( "<b>String error:</b>".  $sql::$connection->error . "\n");

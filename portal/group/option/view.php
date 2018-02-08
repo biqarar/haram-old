@@ -20,7 +20,7 @@ class view extends main_view{
 
 		// var_dump($f);exit();
 
-		$this->data->dataTable = $this->dtable('group/status=api/', array('id','name', 'edit'));	
+		$this->data->dataTable = $this->dtable('group/status=api/', array('id','name',"وضعیت", 'edit'));	
 	}
 }
 ?>

@@ -7,12 +7,12 @@ class model extends main_model {
 	public function post_apishowbranch() {
 		$users = $this->sql(".branch.users", $this->sql_find_users_id($this->xuId("username")));
 		$users_id = $this->sql_find_users_id($this->xuId("username"));
-		$query = $this->sql()->tableUsers_branch()->whereUsers_id($users_id);//->select()->allAssoc();
+		$query = $this->sql()->tableUsers_branch()->whereUsers_id($users_id)->andType("operator")->andStatus("enable");//->select()->allAssoc();
 		$query->joinBranch()->whereId("#users_branch.branch_id");
 		$query = $query->select()->allAssoc();
+		// var_dump($query);exit();
 		debug_lib::msg("list", $query);
 
-		// var_dump($query);exit();
 	}
 
 	public function post_deleteapi(){

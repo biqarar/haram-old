@@ -28,12 +28,12 @@ class view extends main_view{
 		}
 
 		foreach ($f->branch_id->child as $key => $value) {
-			
-			if($value->attr['value'] == $_SESSION['user']['branch']['selected'][0]){
+
+			if($value->attr['value'] == $_SESSION['my_user']['branch']['selected'][0]){
 				$f->branch_id->child[$key]->attr['selected'] = "selected";
-			} 
+			}
 		}
-		
+
 
  		//------------------------------ set province list
 		// $province_list = $this->sql(".assoc.province");
@@ -71,8 +71,8 @@ class view extends main_view{
 		$f->marriage->child(0)->checked("checked");
 
 		//------------------------------ set defult gender whit sex users
-		if(isset($_SESSION['user']['gender'])){
-			$x = ($_SESSION['user']['gender'] == "male") ? 0 : 1;
+		if(isset($_SESSION['my_user']['gender'])){
+			$x = ($_SESSION['my_user']['gender'] == "male") ? 0 : 1;
 			$f->gender->child($x)->checked("checked");
 		}
 
@@ -84,7 +84,7 @@ class view extends main_view{
 		}
 
 		//------------------------------ remove fields
-		$f->remove("username,password,casecode,en_name,en_family,en_father,third_name,third_family,third_father,users_id");	
+		$f->remove("username,password,casecode,en_name,en_family,en_father,third_name,third_family,third_father,users_id");
 
 		//------------------------------ set email
 		$f->atEnd("email");
@@ -98,7 +98,7 @@ class view extends main_view{
 
 
 			$f->remove("email,mobile,phone");
-			
+
 			$this->sql(".edit", "person", $this->xuId(), $f);
 
 			// $f->add("checked_data", 	"button")	->name("checked_data")		->value("checked Data");
@@ -107,12 +107,12 @@ class view extends main_view{
 			// $f->add("sendSMS", 			"button")	->name("sendSMS")			->value("send SMS");
 			// $f->add("blocked", 			"button")	->name("blocked")			->value("blocked");
 			// $f->add("delete", 			"button")	->name("delete")			->value("delete");
-			
-			
+
+
 			$load_file = $this->sql("#load_file", $this->xuId());
 
 			$this->data->files = $load_file;
-			
+
 		}else{
 			$f->nationality->child(35)->selected("selected");
 		}
