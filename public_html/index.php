@@ -4,12 +4,12 @@
 @ In the name Of Allah
 @ author: Baravak @hsbaravak fb.com/hasan.salehi itb.baravak@gmail.com +989356032043
 @ version: 0.0.6
-@ date: 
+@ date:
 **/
 header("Content-Type:text/html; charset=UTF-8");
 /** Define DOMAIn as the server name */
 define("DOMAIN", $_SERVER["SERVER_NAME"]);
-define("host", 'http://'.DOMAIN);
+define("host", 'https://'.DOMAIN);
 /** Define PATH as the site location */
 define("PATH", preg_replace("/index\.php$/", "", $_SERVER["SCRIPT_NAME"]));
 
@@ -22,8 +22,8 @@ if ( file_exists( DIR . '/config.php') ){
 }else{
    // A config file doesn't exist
    // Die with an error message
-    $die  = _( "There doesn't seem to be a 
-                <code>config.php</code> file. 
+    $die  = _( "There doesn't seem to be a
+                <code>config.php</code> file.
                 I need this before we can get started." ) . '</p>';
 
     echo( $die. _( 'Contact with administrator!' ) );
