@@ -9,7 +9,7 @@ header("Content-Type:text/html; charset=UTF-8");
 
 /** Define DOMAIn as the server name */
 define("DOMAIN", $_SERVER["SERVER_NAME"]);
-define("host", 'https://'.DOMAIN . '/portal');
+define("host", 'http://'.DOMAIN . '/portal');
 
 /** Define PATH as the site location */
 define("PATH", preg_replace("/index\.php$/", "", $_SERVER["SCRIPT_NAME"]));

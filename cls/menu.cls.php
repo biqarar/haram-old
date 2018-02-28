@@ -699,8 +699,8 @@ class menu_cls
 	{
 		return  array(
 			array('href' => '', 'title' => gettext('home page')),
-			array('href' => 'https://'.DOMAIN.'/portal/login', 'title' => gettext('register')),
-			array('href' => 'https://'.DOMAIN.'/portal/login', 'title' => gettext('login')),
+			array('href' => 'http://'.DOMAIN.'/portal/login', 'title' => gettext('register')),
+			array('href' => 'http://'.DOMAIN.'/portal/login', 'title' => gettext('login')),
 			array('href' => 'posts/more', 'title' => gettext('news')),
 		 	// array('href' => 'graduate/', 'title' => 'دانش آموختگان'),
 			array('href' => 'strategy', 'title' => gettext('strategy')),

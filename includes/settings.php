@@ -78,7 +78,7 @@ textdomain("*");
 /** Define PATH as the site location */
 define("PATH", preg_replace("/index\.php$/", "", $_SERVER["SCRIPT_NAME"]));
 
-define("host", 'https://'.DOMAIN);
+define("host", 'http://'.DOMAIN);
 
 header("Content-Type:text/html; charset=UTF-8");
 define('FACHR'					, 'ابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیآيئؤكآأإة');
