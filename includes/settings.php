@@ -1,5 +1,5 @@
-<?php 
-// ------------------------------------------------------- Define SERVERNAME(url) as DOMAIN 
+<?php
+// ------------------------------------------------------- Define SERVERNAME(url) as DOMAIN
 define("DOMAIN"		, $_SERVER["SERVER_NAME"]);
 
 // ------------------------------------------------------- SALOOS location
@@ -78,7 +78,7 @@ textdomain("*");
 /** Define PATH as the site location */
 define("PATH", preg_replace("/index\.php$/", "", $_SERVER["SCRIPT_NAME"]));
 
-define("host", 'http://'.DOMAIN);
+define("host", 'https://'.DOMAIN);
 
 header("Content-Type:text/html; charset=UTF-8");
 define('FACHR'					, 'ابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیآيئؤكآأإة');
