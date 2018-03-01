@@ -10,8 +10,8 @@ class main_view{
 		// *********************************************************************** Site Global Variables
 		$this->global->domain             = DOMAIN;
 		$this->global->path               = PATH;
-		$this->global->site_url           = 'https://'.DOMAIN.PATH;
-		$this->global->site_static        = 'https://'.DOMAIN.PATH.'static/';
+		$this->global->site_url           = 'http://'.DOMAIN.PATH;
+		$this->global->site_static        = 'http://'.DOMAIN.PATH.'static/';
 
 		$this->global->site_title         = "مرکز قرآن و حدیث";
 		$this->global->site_desc          = "پورتال جامع مرکز قرآن و حدیث آستان مقدس حضرت فاطمه معصومه";
